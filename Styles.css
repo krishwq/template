@@ -216,16 +216,32 @@ body {
 }
 
 .logo-mark {
-  width: 34px;
-  height: 34px;
+  width: 50px;
+  height: 50px;
   background: var(--gradient);
-  border-radius: var(--radius-sm);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: .85rem;
   font-weight: 900;
   color: #fff;
+  /* border: white 2px solid; */
+}
+.logo-mark img{
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.brand-name{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand-subtitle{
+  font-size: 12px;
 }
 
 .nav-links {
