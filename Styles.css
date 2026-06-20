@@ -108,13 +108,13 @@ body {
   align-items: center;
   gap: 8px;
   padding: 13px 28px;
-  border-radius: var(--radius-pill);
+  border-radius: 30px;
   font-family: 'Syne', sans-serif;
   font-size: .9rem;
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
-  border: 2px solid transparent;
+  border: 2px solid #297aa1;
   transition: var(--transition);
   white-space: nowrap;
 }
