@@ -718,16 +718,6 @@ body {
   position: relative;
 }
 
-/* Slash motif — the signature element */
-.portfolio-preview-placeholder::before {
-  content: '';
-  position: absolute;
-  top: -30%; left: 40%;
-  width: 3px; height: 160%;
-  background: var(--gradient);
-  opacity: .2;
-  transform: rotate(-20deg);
-}
 
 .portfolio-overlay {
   position: absolute;
