@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en"><head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Brand Car Showroom</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+        :root { --vh: 1vh; }
+        body { font-family: 'DM Sans', sans-serif; }
+        .font-display { font-family: 'Playfair Display', serif; }
+        html { scroll-behavior: smooth; }
+        .nav-fixed { position: fixed; top: 0; left: 0; right: 0; z-index: 50; backdrop-filter: blur(12px); background: rgba(255,255,255,0.95); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        .card-hover { transition: transform 0.3s, box-shadow 0.3s; }
+        .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .brand-logo { transition: transform 0.3s, opacity 0.3s; opacity: 0.7; }
+        .brand-logo:hover { transform: scale(1.1); opacity: 1; }
+        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-answer.open { max-height: 300px; }
+        .testimonial-slide { transition: opacity 0.5s; }
+        #back-to-top { transition: opacity 0.3s; }
+    </style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root" class="min-h-screen w-full" style="background: rgb(255, 255, 255);"><!-- Navbar -->
+  <nav id="navbar" class="nav-fixed px-4 py-3">
+   <div class="max-w-7xl mx-auto flex items-center justify-between"><a href="#hero" data-template-id="nav-logo" class="canva-text font-display text-2xl font-bold text-gray-900" style="color: rgb(17, 24, 39); font-weight: bold; font-style: normal; font-size: 16px;">AutoElite</a>
+    <div class="hidden md:flex gap-6 text-sm font-medium text-gray-700"><a href="#about" class="hover:text-blue-600 transition">About</a> <a href="#features" class="hover:text-blue-600 transition">Why Us</a> <a href="#cars" class="hover:text-blue-600 transition">Cars</a> <a href="#booking" class="hover:text-blue-600 transition">Book Test Drive</a> <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
+    </div><button id="mobile-menu-btn" class="md:hidden" aria-label="Menu"><i data-lucide="menu" class="w-6 h-6"></i></button>
+   </div>
+   <div id="mobile-menu" class="hidden md:hidden flex-col gap-3 pt-3 pb-2 text-sm font-medium text-gray-700"><a href="#about" class="block py-1">About</a> <a href="#features" class="block py-1">Why Us</a> <a href="#cars" class="block py-1">Cars</a> <a href="#booking" class="block py-1">Book Test Drive</a> <a href="#contact" class="block py-1">Contact</a>
+   </div>
+  </nav><!-- Hero -->
+  <section id="hero" class="relative w-full" style="min-height: calc(90 * min(var(--vh, 1vh), 1vh));">
+   <div class="absolute inset-0 z-0"><img data-template-id="hero-image" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/18108314/pexels-photo-18108314.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920" alt="Sleek luxury cars showcased in a stylish modern automotive dealership">
+    <div class="absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-transparent"></div>
+   </div>
+   <div class="relative z-10 max-w-7xl mx-auto px-6 flex items-center" style="min-height: calc(90 * min(var(--vh, 1vh), 1vh));">
+    <div class="max-w-2xl pt-20">
+     <h1 data-template-id="hero-title" class="canva-text font-display text-4xl md:text-5xl lg:text-6xl leading-tight text-gray-900" style="color: rgb(17, 24, 39); font-weight: bold; font-style: normal; font-size: 32px;">Your Trusted Multi-Brand Car Destination</h1>
+     <p data-template-id="hero-subtitle" class="canva-text mt-4 text-lg md:text-xl text-gray-600" style="color: rgb(55, 65, 81); font-weight: 400; font-style: normal; font-size: 16px;">Explore the latest models from top automotive brands under one roof.</p>
+     <p data-template-id="hero-desc" class="canva-text mt-3 text-gray-500" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Over 20 years of trusted service, 500+ cars in stock, easy financing, and a seamless buying experience.</p>
+     <div class="mt-8 flex flex-wrap gap-4"><a href="#cars" data-template-id="hero-cta-primary" class="canva-button inline-block px-8 py-3 rounded-full font-semibold text-white shadow-lg hover:shadow-xl transition" style="background: rgb(37, 99, 235); color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Explore Collection</a> <a href="#booking" data-template-id="hero-cta-secondary" class="canva-button inline-block px-8 py-3 rounded-full font-semibold border-2 hover:bg-gray-50 transition" style="color: rgb(37, 99, 235); font-weight: 600; font-style: normal; font-size: 16px;">Book a Test Drive</a>
+     </div>
+    </div>
+   </div>
+  </section><!-- About -->
+  <section id="about" class="w-full py-20 px-6">
+   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div><img data-template-id="about-image" class="canva-image w-full h-80 object-cover rounded-2xl shadow-lg" loading="lazy" src="https://images.pexels.com/photos/36729862/pexels-photo-36729862.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Two businessmen shaking hands in a car dealership sealing a deal">
+    </div>
+    <div>
+     <h2 data-template-id="about-title" class="canva-text font-display text-3xl md:text-4xl text-gray-900" style="color: rgb(17, 24, 39); font-weight: bold; font-style: normal; font-size: 24px;">About Our Showroom</h2>
+     <p data-template-id="about-text" class="canva-text mt-4 text-gray-600 leading-relaxed" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">With over two decades of experience, we are one of the region's most trusted multi-brand car dealerships. From compact hatchbacks to premium SUVs, we offer an extensive range of certified vehicles backed by transparent pricing, easy financing, and unmatched after-sales support.</p>
+     <div class="grid grid-cols-2 gap-6 mt-8">
+      <div class="text-center"><span class="counter text-3xl font-bold text-blue-600" data-target="10000">0</span><span class="text-blue-600 font-bold">+</span>
+       <p data-template-id="stat-customers" class="canva-text text-sm text-gray-500 mt-1" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Happy Customers</p>
+      </div>
+      <div class="text-center"><span class="counter text-3xl font-bold text-blue-600" data-target="500">0</span><span class="text-blue-600 font-bold">+</span>
+       <p data-template-id="stat-cars" class="canva-text text-sm text-gray-500 mt-1" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Cars Available</p>
+      </div>
+      <div class="text-center"><span class="counter text-3xl font-bold text-blue-600" data-target="15">0</span><span class="text-blue-600 font-bold">+</span>
+       <p data-template-id="stat-brands" class="canva-text text-sm text-gray-500 mt-1" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Partner Brands</p>
+      </div>
+      <div class="text-center"><span class="counter text-3xl font-bold text-blue-600" data-target="20">0</span><span class="text-blue-600 font-bold">+</span>
+       <p data-template-id="stat-years" class="canva-text text-sm text-gray-500 mt-1" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Years Experience</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Features -->
+  <section id="features" data-template-id="features-section" class="canva-section w-full py-20 px-6" style="background: rgb(248, 250, 252);">
+   <div class="max-w-7xl mx-auto text-center">
+    <h2 data-template-id="features-title" class="canva-text font-display text-3xl md:text-4xl text-gray-900" style="color: rgb(17, 24, 39); font-weight: bold; font-style: normal; font-size: 24px;">Why Choose Us</h2>
+    <p data-template-id="features-subtitle" class="canva-text mt-2 text-gray-500" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Experience that sets us apart from the rest</p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12" id="features-grid">
+    </div>
+   </div>
+  </section><!-- Brand Partners -->
+  <section class="w-full py-20 px-6">
+   <div class="max-w-7xl mx-auto text-center">
+    <h2 data-template-id="brands-title" class="canva-text font-display text-3xl md:text-4xl text-gray-900" style="color: rgb(17, 24, 39); font-weight: bold; font-style: normal; font-size: 24px;">Our Brand Partners</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 mt-12" id="brands-grid">
+    </div>
+   </div>
+  </section><!-- Car Collection -->
+  <section id="cars" data-template-id="cars-section" class="canva-section w-full py-20 px-6" style="background: rgb(248, 250, 252);">
+   <div class="max-w-7xl mx-auto">
+    <h2 data-template-id="cars-title" class="canva-text font-display text-3xl md:text-4xl text-gray-900 text-center" style="color: rgb(17, 24, 39); font-weight: bold; font-style: normal; font-size: 24px;">Featured Collection</h2>
+    <p data-template-id="cars-subtitle" class="canva-text mt-2 text-gray-500 text-center" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Handpicked vehicles from top brands at competitive prices</p><!-- Filters -->
+    <div class="flex flex-wrap gap-3 mt-8 justify-center"><select id="filter-budget" class="px-4 py-2 rounded-full border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-200"> <option value="">All Budgets</option> <option value="5">Under ₹5 Lakhs</option> <option value="10">₹5L – ₹10L</option> <option value="15">₹10L – ₹15L</option> <option value="25">₹15L – ₹25L</option> <option value="99">Above ₹25L</option> </select> <select id="filter-brand" class="px-4 py-2 rounded-full border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-200"> <option value="">All Brands</option> <option>Hyundai</option><option>Honda</option><option>Maruti Suzuki</option><option>Kia</option><option>Toyota</option><option>Mahindra</option> </select> <select id="filter-fuel" class="px-4 py-2 rounded-full border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-200"> <option value="">All Fuel Types</option> <option>Petrol</option><option>Diesel</option><option>Hybrid</option> </select> <select id="filter-body" class="px-4 py-2 rounded-full border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-200"> <option value="">All Types</option> <option>SUV</option><option>Sedan</option><option>Hatchback</option><option>MPV</option> </select>
+    </div>
+    <div id="car-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10"></div>
+    <p id="no-cars" class="hidden text-center text-gray-400 mt-10 text-lg">No cars match your filters.</p>
+   </div>
+  </section><!-- Booking -->
+  <section id="booking" class="w-full py-20 px-6">
+   <div class="max-w-3xl mx-auto">
+    <h2 data-template-id="booking-title" class="canva-text font-display text-3xl md:text-4xl text-gray-900 text-center" style="color: rgb(17, 24, 39); font-weight: bold; font-style: normal; font-size: 24px;">Schedule Your Test Drive</h2>
+    <p data-template-id="booking-subtitle" class="canva-text mt-2 text-gray-500 text-center" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Experience your dream car before you buy</p>
+    <form id="booking-form" class="mt-10 grid sm:grid-cols-2 gap-5">
+     <div><label for="b-name" class="text-sm font-medium text-gray-700">Full Name</label> <input id="b-name" type="text" required="" class="w-full mt-1 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-200 focus:outline-none">
+     </div>
+     <div><label for="b-phone" class="text-sm font-medium text-gray-700">Phone Number</label> <input id="b-phone" type="tel" required="" class="w-full mt-1 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-200 focus:outline-none">
+     </div>
+     <div><label for="b-email" class="text-sm font-medium text-gray-700">Email Address</label> <input id="b-email" type="email" required="" class="w-full mt-1 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-200 focus:outline-none">
+     </div>
+     <div><label for="b-vehicle" class="text-sm font-medium text-gray-700">Preferred Vehicle</label> <input id="b-vehicle" type="text" class="w-full mt-1 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-200 focus:outline-none">
+     </div>
+     <div><label for="b-date" class="text-sm font-medium text-gray-700">Preferred Date</label> <input id="b-date" type="date" required="" class="w-full mt-1 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-200 focus:outline-none">
+     </div>
+     <div><label for="b-time" class="text-sm font-medium text-gray-700">Preferred Time</label> <select id="b-time" class="w-full mt-1 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-200 focus:outline-none"> <option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option> </select>
+     </div>
+     <div class="sm:col-span-2"><label for="b-msg" class="text-sm font-medium text-gray-700">Message</label> <textarea id="b-msg" rows="3" class="w-full mt-1 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-200 focus:outline-none"></textarea>
+     </div>
+     <div class="sm:col-span-2 text-center"><button data-template-id="booking-btn" type="submit" class="canva-button px-10 py-3 rounded-full font-semibold text-white shadow-lg hover:shadow-xl transition" style="background: rgb(37, 99, 235); color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Book Test Drive Now</button>
+     </div>
+    </form>
+    <div id="booking-success" class="hidden mt-8 p-6 rounded-2xl bg-green-50 border border-green-200 text-center"><i data-lucide="check-circle" class="w-12 h-12 text-green-500 mx-auto"></i>
+     <p data-template-id="booking-success-msg" class="canva-text mt-3 text-lg font-semibold text-green-700" style="color: rgb(21, 128, 61); font-weight: 400; font-style: normal; font-size: 16px;">Your test drive has been booked! We'll contact you shortly to confirm.</p>
+    </div>
+   </div>
+  </section><!-- Testimonials -->
+  <section data-template-id="testimonials-section" class="canva-section w-full py-20 px-6" style="background: rgb(248, 250, 252);">
+   <div class="max-w-4xl mx-auto text-center">
+    <h2 data-template-id="testimonials-title" class="canva-text font-display text-3xl md:text-4xl text-gray-900" style="color: rgb(17, 24, 39); font-weight: bold; font-style: normal; font-size: 24px;">What Our Customers Say</h2>
+    <div class="relative mt-12 overflow-hidden">
+     <div id="testimonial-container"><!-- Testimonial 1 -->
+      <div class="testimonial-slide" data-slide="0">
+       <div class="flex flex-col items-center"><img data-template-id="review-1-photo" class="canva-image w-20 h-20 rounded-full object-cover shadow" loading="lazy" src="https://images.pexels.com/photos/11357069/pexels-photo-11357069.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Portrait of a joyful man in a blue blazer">
+        <h4 data-template-id="review-1-name" class="canva-text mt-4 font-semibold text-gray-900" style="color: rgb(17, 24, 39); font-weight: 600; font-style: normal; font-size: 16px;">Rajesh Kumar</h4>
+        <div class="flex gap-1 mt-2 text-yellow-400">
+         ★★★★★
+        </div>
+        <p data-template-id="review-1-text" class="canva-text mt-3 text-gray-600 max-w-lg mx-auto italic" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Excellent service and a huge variety of cars. The buying process was smooth and transparent. Highly recommended!</p>
+       </div>
+      </div><!-- Testimonial 2 -->
+      <div class="testimonial-slide hidden" data-slide="1">
+       <div class="flex flex-col items-center"><img data-template-id="review-2-photo" class="canva-image w-20 h-20 rounded-full object-cover shadow" loading="lazy" src="https://images.pexels.com/photos/29811345/pexels-photo-29811345.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Confident professional woman smiling in business attire">
+        <h4 data-template-id="review-2-name" class="canva-text mt-4 font-semibold text-gray-900" style="color: rgb(17, 24, 39); font-weight: 600; font-style: normal; font-size: 16px;">Priya Sharma</h4>
+        <div class="flex gap-1 mt-2 text-yellow-400">
+         ★★★★★
+        </div>
+        <p data-template-id="review-2-text" class="canva-text mt-3 text-gray-600 max-w-lg mx-auto italic" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Best dealership in the city. Helpful staff and great financing options. Got my dream car at an amazing price!</p>
+       </div>
+      </div><!-- Testimonial 3 -->
+      <div class="testimonial-slide hidden" data-slide="2">
+       <div class="flex flex-col items-center"><img data-template-id="review-3-photo" class="canva-image w-20 h-20 rounded-full object-cover shadow" loading="lazy" src="https://images.pexels.com/photos/6102858/pexels-photo-6102858.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Portrait of a joyful young man with a beard">
+        <h4 data-template-id="review-3-name" class="canva-text mt-4 font-semibold text-gray-900" style="color: rgb(17, 24, 39); font-weight: 600; font-style: normal; font-size: 16px;">Amit Patel</h4>
+        <div class="flex gap-1 mt-2 text-yellow-400">
+         ★★★★★
+        </div>
+        <p data-template-id="review-3-text" class="canva-text mt-3 text-gray-600 max-w-lg mx-auto italic" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Booked a test drive online and purchased my dream car within a week. The whole experience was fantastic!</p>
+       </div>
+      </div>
+     </div>
+     <div class="flex justify-center gap-2 mt-8"><button class="testimonial-dot w-3 h-3 rounded-full bg-blue-600" data-dot="0" aria-label="Review 1"></button> <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300" data-dot="1" aria-label="Review 2"></button> <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300" data-dot="2" aria-label="Review 3"></button>
+     </div>
+    </div>
+   </div>
+  </section><!-- Financing -->
+  <section class="w-full py-20 px-6">
+   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div>
+     <h2 data-template-id="finance-title" class="canva-text font-display text-3xl md:text-4xl text-gray-900" style="color: rgb(17, 24, 39); font-weight: bold; font-style: normal; font-size: 24px;">Financing &amp; Insurance</h2>
+     <p data-template-id="finance-text" class="canva-text mt-4 text-gray-600 leading-relaxed" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">We partner with leading banks and financial institutions to offer you the best loan rates. Quick approvals, minimal paperwork, and flexible EMI options make owning your dream car easier than ever.</p>
+     <ul class="mt-6 space-y-3" id="finance-list">
+     </ul>
+    </div>
+    <div><img data-template-id="finance-image" class="canva-image w-full h-72 object-cover rounded-2xl shadow-lg" loading="lazy" src="https://images.pexels.com/photos/7144212/pexels-photo-7144212.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Close-up of a business handshake as car keys are handed over">
+    </div>
+   </div>
+  </section><!-- Contact -->
+  <section id="contact" data-template-id="contact-section" class="canva-section w-full py-20 px-6" style="background: rgb(248, 250, 252);">
+   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
+    <div>
+     <h2 data-template-id="contact-title" class="canva-text font-display text-3xl md:text-4xl text-gray-900" style="color: rgb(17, 24, 39); font-weight: bold; font-style: normal; font-size: 24px;">Visit Our Showroom</h2>
+     <div class="mt-8 space-y-5">
+      <div class="flex items-start gap-3">
+       <i data-lucide="map-pin" class="w-5 h-5 text-blue-600 mt-1"></i>
+       <p data-template-id="contact-address" class="canva-text text-gray-600" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">AutoElite Motors, NH-16, Patia Square, Bhubaneswar, Odisha 751024</p>
+      </div>
+      <div class="flex items-center gap-3">
+       <i data-lucide="phone" class="w-5 h-5 text-blue-600"></i>
+       <p data-template-id="contact-phone" class="canva-text text-gray-600" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">+91 98765 43210</p>
+      </div>
+      <div class="flex items-center gap-3">
+       <i data-lucide="mail" class="w-5 h-5 text-blue-600"></i>
+       <p data-template-id="contact-email" class="canva-text text-gray-600" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">info@autoelite.in</p>
+      </div>
+      <div class="flex items-center gap-3">
+       <i data-lucide="clock" class="w-5 h-5 text-blue-600"></i>
+       <p data-template-id="contact-hours" class="canva-text text-gray-600" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Mon – Sat: 9:00 AM – 8:00 PM</p>
+      </div>
+     </div>
+    </div>
+    <div class="rounded-2xl overflow-hidden shadow-lg bg-gray-200 min-h-[300px] flex items-center justify-center">
+     <div class="text-center text-gray-500 p-8"><i data-lucide="map" class="w-16 h-16 mx-auto mb-3 opacity-40"></i>
+      <p class="text-sm">Interactive Map</p>
+      <p class="text-xs mt-1">Visit us at our showroom location</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- FAQ -->
+  <section class="w-full py-20 px-6">
+   <div class="max-w-3xl mx-auto">
+    <h2 data-template-id="faq-title" class="canva-text font-display text-3xl md:text-4xl text-gray-900 text-center" style="color: rgb(17, 24, 39); font-weight: bold; font-style: normal; font-size: 24px;">Frequently Asked Questions</h2>
+    <div class="mt-10 space-y-4" id="faq-container"></div>
+   </div>
+  </section><!-- Footer -->
+  <footer data-template-id="footer-section" class="canva-footer w-full py-12 px-6" style="background: rgb(17, 24, 39); color: rgb(243, 244, 246);">
+   <div class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div>
+     <h3 data-template-id="footer-brand" class="canva-text font-display text-xl font-bold" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 19px;">AutoElite</h3>
+     <p data-template-id="footer-desc" class="canva-text mt-3 text-sm opacity-80" style="color: rgb(209, 213, 219); font-weight: 400; font-style: normal; font-size: 16px;">Your trusted multi-brand car destination with 20+ years of excellence in automotive retail.</p>
+    </div>
+    <div>
+     <h4 class="font-semibold mb-3">Quick Links</h4>
+     <div class="space-y-2 text-sm opacity-80">
+      <a href="#about" class="block hover:opacity-100">About Us</a><a href="#cars" class="block hover:opacity-100">Our Cars</a><a href="#booking" class="block hover:opacity-100">Book Test Drive</a><a href="#contact" class="block hover:opacity-100">Contact</a>
+     </div>
+    </div>
+    <div>
+     <h4 class="font-semibold mb-3">Brands</h4>
+     <div class="space-y-2 text-sm opacity-80">
+      <p>Maruti Suzuki</p>
+      <p>Hyundai</p>
+      <p>Honda</p>
+      <p>Tata Motors</p>
+      <p>Kia</p>
+     </div>
+    </div>
+    <div>
+     <h4 class="font-semibold mb-3">Newsletter</h4>
+     <form id="newsletter-form" class="flex mt-2"><input type="email" placeholder="Your email" class="flex-1 px-3 py-2 rounded-l-lg text-gray-900 text-sm focus:outline-none" required=""> <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-r-lg text-sm font-medium hover:bg-blue-700">Subscribe</button>
+     </form>
+     <div class="flex gap-4 mt-4"><i data-lucide="facebook" class="w-5 h-5 opacity-70 hover:opacity-100 cursor-pointer"></i> <i data-lucide="instagram" class="w-5 h-5 opacity-70 hover:opacity-100 cursor-pointer"></i> <i data-lucide="twitter" class="w-5 h-5 opacity-70 hover:opacity-100 cursor-pointer"></i> <i data-lucide="youtube" class="w-5 h-5 opacity-70 hover:opacity-100 cursor-pointer"></i>
+     </div>
+    </div>
+   </div>
+   <div class="max-w-7xl mx-auto mt-10 pt-6 border-t border-white/20 text-center text-sm opacity-70">
+    <p data-template-id="footer-copyright" class="canva-text" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">© 2026 AutoElite Motors. All rights reserved.</p>
+   </div>
+  </footer><!-- Floating buttons --> <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 left-6 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition" aria-label="WhatsApp">
+   <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+   </svg></a> <button id="back-to-top" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg opacity-0 pointer-events-none hover:bg-blue-700 transition" aria-label="Back to top"> <i data-lucide="chevron-up" class="w-6 h-6"></i> </button>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script>
+    (function() {
+        // Mobile menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+        // Back to top
+        const btt = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) { btt.style.opacity = '1'; btt.classList.remove('pointer-events-none'); }
+            else { btt.style.opacity = '0'; btt.classList.add('pointer-events-none'); }
+        });
+        btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Counter animation
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = +el.dataset.target;
+                    const duration = 2000;
+                    const start = performance.now();
+                    const animate = (now) => {
+                        const progress = Math.min((now - start) / duration, 1);
+                        el.textContent = Math.floor(progress * target).toLocaleString('en-IN');
+                        if (progress < 1) requestAnimationFrame(animate);
+                    };
+                    requestAnimationFrame(animate);
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(c => counterObserver.observe(c));
+
+        // Features grid
+        const features = [
+            { icon: 'shield-check', title: 'Certified & Quality Checked' },
+            { icon: 'indian-rupee', title: 'Best Market Pricing' },
+            { icon: 'wallet', title: 'Easy Financing Options' },
+            { icon: 'building-2', title: 'Trusted Multi-Brand Dealer' },
+            { icon: 'headphones', title: 'Professional Support' },
+            { icon: 'file-check', title: 'Fast Documentation' },
+            { icon: 'car', title: 'Test Drive Available' },
+            { icon: 'award', title: 'Extended Warranty' }
+        ];
+        const fg = document.getElementById('features-grid');
+        features.forEach(f => {
+            const div = document.createElement('div');
+            div.className = 'card-hover bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center';
+            div.innerHTML = `<div class="w-14 h-14 mx-auto rounded-full bg-blue-50 flex items-center justify-center mb-4"><i data-lucide="${f.icon}" class="w-6 h-6 text-blue-600"></i></div><h3 class="font-semibold text-gray-800">${f.title}</h3>`;
+            fg.appendChild(div);
+        });
+
+        // Brands grid
+        const brands = ['Maruti Suzuki','Hyundai','Honda','Tata Motors','Mahindra','Toyota','Kia','MG Motor','Nissan','Volkswagen'];
+        const bg = document.getElementById('brands-grid');
+        brands.forEach(b => {
+            const div = document.createElement('div');
+            div.className = 'brand-logo flex items-center justify-center h-20 rounded-xl border border-gray-100 bg-white shadow-sm px-4';
+            div.innerHTML = `<span class="font-semibold text-gray-700 text-sm text-center">${b}</span>`;
+            bg.appendChild(div);
+        });
+
+        // Cars data
+        const cars = [
+            { brand:'Hyundai', model:'Creta', fuel:'Petrol / Diesel', trans:'Manual / Automatic', seats:5, body:'SUV', price:'₹11L – ₹20L', minL:11, maxL:20, img:'car-creta' },
+            { brand:'Honda', model:'City', fuel:'Petrol', trans:'Manual / CVT', seats:5, body:'Sedan', price:'₹12L – ₹18L', minL:12, maxL:18, img:'car-city' },
+            { brand:'Maruti Suzuki', model:'Brezza', fuel:'Petrol', trans:'Manual / Automatic', seats:5, body:'SUV', price:'₹9L – ₹15L', minL:9, maxL:15, img:'car-brezza' },
+            { brand:'Kia', model:'Seltos', fuel:'Petrol / Diesel', trans:'Manual / Automatic', seats:5, body:'SUV', price:'₹11L – ₹21L', minL:11, maxL:21, img:'car-seltos' },
+            { brand:'Toyota', model:'Innova Hycross', fuel:'Hybrid', trans:'Automatic', seats:7, body:'MPV', price:'₹19L – ₹31L', minL:19, maxL:31, img:'car-innova' },
+            { brand:'Mahindra', model:'XUV700', fuel:'Petrol / Diesel', trans:'Manual / Automatic', seats:7, body:'SUV', price:'₹14L – ₹30L', minL:14, maxL:30, img:'car-xuv700' }
+        ];
+
+        const carImages = {
+            'car-creta': 'https://images.pexels.com/photos/12163946/pexels-photo-12163946.jpeg?auto=compress&cs=tinysrgb&w=800',
+            'car-city': 'https://images.pexels.com/photos/16495911/pexels-photo-16495911.jpeg?auto=compress&cs=tinysrgb&w=800',
+            'car-brezza': 'https://images.pexels.com/photos/4077265/pexels-photo-4077265.jpeg?auto=compress&cs=tinysrgb&w=800',
+            'car-seltos': 'https://images.pexels.com/photos/35290267/pexels-photo-35290267.jpeg?auto=compress&cs=tinysrgb&w=800',
+            'car-innova': 'https://images.pexels.com/photos/37029578/pexels-photo-37029578.jpeg?auto=compress&cs=tinysrgb&w=800',
+            'car-xuv700': 'https://images.pexels.com/photos/11396006/pexels-photo-11396006.jpeg?auto=compress&cs=tinysrgb&w=800'
+        };
+
+        function renderCars(filtered) {
+            const grid = document.getElementById('car-grid');
+            const noMsg = document.getElementById('no-cars');
+            grid.innerHTML = '';
+            if (filtered.length === 0) { noMsg.classList.remove('hidden'); return; }
+            noMsg.classList.add('hidden');
+            filtered.forEach(c => {
+                const div = document.createElement('div');
+                div.className = 'card-hover bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100';
+                div.innerHTML = `
+                    <img src="${carImages[c.img]}" alt="${c.brand} ${c.model}" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-5">
+                        <span class="text-xs font-medium text-blue-600 uppercase">${c.brand}</span>
+                        <h3 class="text-lg font-bold text-gray-900 mt-1">${c.model}</h3>
+                        <div class="flex flex-wrap gap-2 mt-3 text-xs text-gray-500">
+                            <span class="px-2 py-1 bg-gray-50 rounded">${c.fuel}</span>
+                            <span class="px-2 py-1 bg-gray-50 rounded">${c.trans}</span>
+                            <span class="px-2 py-1 bg-gray-50 rounded">${c.seats} Seats</span>
+                            <span class="px-2 py-1 bg-gray-50 rounded">${c.body}</span>
+                        </div>
+                        <p class="mt-3 text-xl font-bold text-gray-900">${c.price}</p>
+                        <div class="flex gap-2 mt-4">
+                            <button class="flex-1 px-3 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">View Details</button>
+                            <a href="#booking" class="flex-1 px-3 py-2 text-sm font-medium border border-blue-600 text-blue-600 rounded-lg text-center hover:bg-blue-50 transition">Book Test Drive</a>
+                        </div>
+                    </div>`;
+                grid.appendChild(div);
+            });
+        }
+
+        function applyFilters() {
+            const budget = document.getElementById('filter-budget').value;
+            const brand = document.getElementById('filter-brand').value;
+            const fuel = document.getElementById('filter-fuel').value;
+            const body = document.getElementById('filter-body').value;
+            let filtered = cars;
+            if (budget) {
+                const b = +budget;
+                if (b === 5) filtered = filtered.filter(c => c.minL < 5);
+                else if (b === 10) filtered = filtered.filter(c => c.minL >= 5 && c.minL <= 10);
+                else if (b === 15) filtered = filtered.filter(c => c.minL >= 10 && c.minL <= 15);
+                else if (b === 25) filtered = filtered.filter(c => c.minL >= 15 && c.minL <= 25);
+                else if (b === 99) filtered = filtered.filter(c => c.maxL > 25);
+            }
+            if (brand) filtered = filtered.filter(c => c.brand === brand);
+            if (fuel) filtered = filtered.filter(c => c.fuel.includes(fuel));
+            if (body) filtered = filtered.filter(c => c.body === body);
+            renderCars(filtered);
+        }
+
+        document.getElementById('filter-budget').addEventListener('change', applyFilters);
+        document.getElementById('filter-brand').addEventListener('change', applyFilters);
+        document.getElementById('filter-fuel').addEventListener('change', applyFilters);
+        document.getElementById('filter-body').addEventListener('change', applyFilters);
+        renderCars(cars);
+
+        // Booking form
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.classList.add('hidden');
+            document.getElementById('booking-success').classList.remove('hidden');
+            lucide.createIcons();
+        });
+
+        // Testimonials carousel
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const dots = document.querySelectorAll('.testimonial-dot');
+        function showSlide(i) {
+            slides.forEach(s => s.classList.add('hidden'));
+            dots.forEach(d => { d.classList.remove('bg-blue-600'); d.classList.add('bg-gray-300'); });
+            slides[i].classList.remove('hidden');
+            dots[i].classList.remove('bg-gray-300');
+            dots[i].classList.add('bg-blue-600');
+            currentSlide = i;
+        }
+        dots.forEach(d => d.addEventListener('click', () => showSlide(+d.dataset.dot)));
+        setInterval(() => showSlide((currentSlide + 1) % 3), 5000);
+
+        // Finance list
+        const financeItems = ['Low EMI Options','Bank Partnerships','Quick Loan Approval','Insurance Assistance','Exchange Programs'];
+        const fl = document.getElementById('finance-list');
+        financeItems.forEach(item => {
+            const li = document.createElement('li');
+            li.className = 'flex items-center gap-3 text-gray-600';
+            li.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0"></i><span>${item}</span>`;
+            fl.appendChild(li);
+        });
+
+        // FAQ
+        const faqs = [
+            { q: 'Do you provide financing?', a: 'Yes, we offer easy financing options with multiple bank partnerships and quick loan approvals.' },
+            { q: 'Can I book a test drive online?', a: 'Absolutely! Use our booking form above to schedule a test drive at your convenience.' },
+            { q: 'Are all vehicles certified?', a: 'Every vehicle goes through a rigorous quality check and certification process before being listed.' },
+            { q: 'Do you offer insurance assistance?', a: 'Yes, we provide comprehensive insurance assistance and help you choose the best plan.' },
+            { q: 'Can I exchange my old car?', a: 'We have exchange programs that offer great value for your existing vehicle towards a new purchase.' }
+        ];
+        const fc = document.getElementById('faq-container');
+        faqs.forEach((f, i) => {
+            const div = document.createElement('div');
+            div.className = 'border border-gray-100 rounded-xl overflow-hidden';
+            div.innerHTML = `<button class="faq-btn w-full flex items-center justify-between px-6 py-4 text-left font-medium text-gray-800 hover:bg-gray-50 transition" aria-expanded="false"><span>${f.q}</span><i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 faq-icon transition-transform"></i></button><div class="faq-answer px-6 text-gray-600 text-sm"><p class="pb-4">${f.a}</p></div>`;
+            fc.appendChild(div);
+        });
+        fc.addEventListener('click', e => {
+            const btn = e.target.closest('.faq-btn');
+            if (!btn) return;
+            const answer = btn.nextElementSibling;
+            const icon = btn.querySelector('.faq-icon');
+            const isOpen = answer.classList.contains('open');
+            answer.classList.toggle('open');
+            icon.style.transform = isOpen ? '' : 'rotate(180deg)';
+            btn.setAttribute('aria-expanded', !isOpen);
+        });
+
+        // Newsletter
+        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.innerHTML = '<p class="text-sm text-green-300 py-2">✓ Subscribed!</p>';
+        });
+
+        lucide.createIcons();
+    })();
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a115a9ad73fe6068',t:'MTc4MjQwODIzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body></html>

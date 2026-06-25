@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en"><head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Bike Showroom</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+        * { font-family: 'DM Sans', sans-serif; }
+        html { scroll-behavior: smooth; }
+        .hero-gradient { background: linear-gradient(135deg, rgba(16,24,40,0.7) 0%, rgba(0,102,255,0.3) 100%); }
+        .card-hover { transition: transform 0.3s, box-shadow 0.3s; }
+        .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .fade-up { opacity: 0; transform: translateY(30px); animation: fadeUp 0.6s forwards; }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .nav-sticky { position: fixed; top: 0; left: 0; right: 0; z-index: 50; backdrop-filter: blur(12px); background: rgba(255,255,255,0.95); box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    </style>
+  <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        electric: '#0066FF',
+                        racing: '#E63946',
+                        graphite: '#222222',
+                        navy: '#101828',
+                        silver: '#D9D9D9'
+                    }
+                }
+            }
+        }
+    </script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root" class="min-h-screen bg-white text-graphite" style="background: rgb(255, 255, 255);"><!-- Navigation -->
+  <nav id="navbar" class="w-full py-4 px-6 lg:px-12 transition-all duration-300 absolute top-0 left-0 right-0 z-50">
+   <div class="max-w-7xl mx-auto flex items-center justify-between"><a href="#" class="flex items-center gap-2">
+     <div class="w-10 h-10 bg-electric rounded-lg flex items-center justify-center"><i data-lucide="bike" class="w-6 h-6 text-white"></i>
+     </div><span data-template-id="nav-logo" class="canva-text text-xl font-bold" style="color: rgb(34, 34, 34); font-weight: 800; font-style: normal; font-size: 22px;">MotoVerse</span> </a>
+    <div class="hidden lg:flex items-center gap-8"><a href="#categories" class="text-sm font-medium hover:text-electric transition-colors">Categories</a> <a href="#featured" class="text-sm font-medium hover:text-electric transition-colors">Bikes</a> <a href="#reviews" class="text-sm font-medium hover:text-electric transition-colors">Reviews</a> <a href="#gallery" class="text-sm font-medium hover:text-electric transition-colors">Gallery</a> <a href="#contact" class="text-sm font-medium hover:text-electric transition-colors">Contact</a> <a href="#booking" data-template-id="nav-cta" class="canva-button px-5 py-2.5 rounded-full text-sm font-semibold transition-all hover:scale-105" style="background: rgb(0, 102, 255); color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Book Test Ride</a>
+    </div><button id="mobile-menu-btn" class="lg:hidden p-2"><i data-lucide="menu" class="w-6 h-6"></i></button>
+   </div>
+   <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 border-t border-gray-100 pt-4 flex flex-col gap-3"><a href="#categories" class="text-sm font-medium py-2">Categories</a> <a href="#featured" class="text-sm font-medium py-2">Bikes</a> <a href="#booking" class="text-sm font-medium py-2">Book Test Ride</a> <a href="#contact" class="text-sm font-medium py-2">Contact</a>
+   </div>
+  </nav><!-- Hero Section -->
+  <header class="relative w-full min-h-screen flex items-center overflow-hidden"><img data-template-id="hero-img" class="canva-image absolute inset-0 w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/2127035/pexels-photo-2127035.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920" alt="Sleek sports motorcycle showcased indoors with reflective surfaces">
+   <div class="hero-gradient absolute inset-0"></div>
+   <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-32">
+    <div class="max-w-3xl fade-up">
+     <h1 data-template-id="hero-title" class="canva-text text-4xl md:text-6xl font-bold text-white leading-tight mb-6" style="color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 56px;">Ride Into The Future With Premium Bikes &amp; E-Mobility</h1>
+     <p data-template-id="hero-subtitle" class="canva-text text-lg md:text-xl text-gray-200 mb-8 max-w-2xl" style="color: rgb(229, 231, 235); font-weight: 400; font-style: normal; font-size: 20px;">Discover powerful motorcycles and smart electric bikes designed for performance, comfort, and everyday adventure.</p>
+     <div class="flex flex-wrap gap-4"><a href="#categories" data-template-id="hero-cta-1" class="canva-button px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105" style="background: rgb(0, 102, 255); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Explore Bikes</a> <a href="#booking" data-template-id="hero-cta-2" class="canva-button px-8 py-4 rounded-full font-semibold text-lg border-2 border-white transition-all hover:scale-105" style="background: transparent; color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Book A Test Ride</a>
+     </div>
+    </div><!-- Floating spec cards -->
+    <div class="hidden lg:flex absolute right-12 top-1/2 -translate-y-1/2 flex-col gap-4 fade-up stagger-2">
+     <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
+      <p class="text-white/70 text-xs">Top Speed</p>
+      <p class="text-white text-2xl font-bold">180 km/h</p>
+     </div>
+     <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
+      <p class="text-white/70 text-xs">Battery Range</p>
+      <p class="text-white text-2xl font-bold">150 km</p>
+     </div>
+     <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
+      <p class="text-white/70 text-xs">0-60 km/h</p>
+      <p class="text-white text-2xl font-bold">3.2 sec</p>
+     </div>
+    </div>
+   </div>
+  </header><!-- About Section -->
+  <section class="w-full py-20 px-6 lg:px-12 bg-gray-50">
+   <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+    <div>
+     <p data-template-id="about-tag" class="canva-text text-sm font-semibold uppercase tracking-wider mb-3" style="color: rgb(0, 102, 255); font-weight: 600; font-style: normal; font-size: 13px;">ABOUT OUR SHOWROOM</p>
+     <h2 data-template-id="about-title" class="canva-text text-3xl md:text-4xl font-bold mb-6" style="color: rgb(34, 34, 34); font-weight: bold; font-style: normal; font-size: 24px;">Your Trusted Destination for Premium Two-Wheelers</h2>
+     <p data-template-id="about-desc" class="canva-text text-gray-600 leading-relaxed mb-8" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">With over 10 years of experience, we bring you the finest collection of motorcycles, electric bikes, and smart mobility solutions. Our certified team ensures every rider finds their perfect match with expert guidance and world-class service.</p>
+     <div class="grid grid-cols-2 gap-6">
+      <div class="text-center p-4 bg-white rounded-2xl shadow-sm">
+       <p class="text-3xl font-bold text-electric">15,000+</p>
+       <p class="text-sm text-gray-500 mt-1">Happy Riders</p>
+      </div>
+      <div class="text-center p-4 bg-white rounded-2xl shadow-sm">
+       <p class="text-3xl font-bold text-electric">500+</p>
+       <p class="text-sm text-gray-500 mt-1">Bike Models</p>
+      </div>
+      <div class="text-center p-4 bg-white rounded-2xl shadow-sm">
+       <p class="text-3xl font-bold text-electric">10+</p>
+       <p class="text-sm text-gray-500 mt-1">Years Experience</p>
+      </div>
+      <div class="text-center p-4 bg-white rounded-2xl shadow-sm">
+       <p class="text-3xl font-bold text-electric">100%</p>
+       <p class="text-sm text-gray-500 mt-1">Satisfaction</p>
+      </div>
+     </div>
+    </div>
+    <div class="rounded-3xl overflow-hidden shadow-xl"><img data-template-id="about-img" class="canva-image w-full h-96 object-cover" loading="lazy" src="https://images.pexels.com/photos/5622298/pexels-photo-5622298.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Two men in a motorcycle dealership finalize a purchase">
+    </div>
+   </div>
+  </section><!-- Why Choose Us -->
+  <section class="w-full py-20 px-6 lg:px-12">
+   <div class="max-w-7xl mx-auto text-center mb-14">
+    <h2 data-template-id="why-title" class="canva-text text-3xl md:text-4xl font-bold mb-4" style="color: rgb(34, 34, 34); font-weight: bold; font-style: normal; font-size: 24px;">Why Choose MotoVerse</h2>
+    <p data-template-id="why-subtitle" class="canva-text text-gray-500 max-w-2xl mx-auto" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Everything you need for the perfect ride, all under one roof.</p>
+   </div>
+   <div class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div data-template-id="why-card-1" class="canva-card card-hover p-6 rounded-2xl text-center" style="background: rgb(255, 255, 255);">
+     <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+      <i data-lucide="trophy" class="w-7 h-7 text-electric"></i>
+     </div>
+     <h3 data-template-id="why-card-1-title" class="canva-text font-semibold mb-2" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 19px;">Premium Collection</h3>
+     <p data-template-id="why-card-1-desc" class="canva-text text-sm" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">500+ models from top brands worldwide</p>
+    </div>
+    <div data-template-id="why-card-2" class="canva-card card-hover p-6 rounded-2xl text-center" style="background: rgb(255, 255, 255);">
+     <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+      <i data-lucide="zap" class="w-7 h-7 text-electric"></i>
+     </div>
+     <h3 data-template-id="why-card-2-title" class="canva-text font-semibold mb-2" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 19px;">Latest EV Technology</h3>
+     <p data-template-id="why-card-2-desc" class="canva-text text-sm" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Cutting-edge electric mobility solutions</p>
+    </div>
+    <div data-template-id="why-card-3" class="canva-card card-hover p-6 rounded-2xl text-center" style="background: rgb(255, 255, 255);">
+     <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+      <i data-lucide="wrench" class="w-7 h-7 text-electric"></i>
+     </div>
+     <h3 data-template-id="why-card-3-title" class="canva-text font-semibold mb-2" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 19px;">Expert Service Support</h3>
+     <p data-template-id="why-card-3-desc" class="canva-text text-sm" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Certified technicians for all brands</p>
+    </div>
+    <div data-template-id="why-card-4" class="canva-card card-hover p-6 rounded-2xl text-center" style="background: rgb(255, 255, 255);">
+     <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+      <i data-lucide="credit-card" class="w-7 h-7 text-electric"></i>
+     </div>
+     <h3 data-template-id="why-card-4-title" class="canva-text font-semibold mb-2" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 19px;">Flexible Financing</h3>
+     <p data-template-id="why-card-4-desc" class="canva-text text-sm" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Easy EMI options starting at 0% interest</p>
+    </div>
+    <div data-template-id="why-card-5" class="canva-card card-hover p-6 rounded-2xl text-center" style="background: rgb(255, 255, 255);">
+     <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+      <i data-lucide="map-pin" class="w-7 h-7 text-electric"></i>
+     </div>
+     <h3 data-template-id="why-card-5-title" class="canva-text font-semibold mb-2" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 19px;">Test Ride Facility</h3>
+     <p data-template-id="why-card-5-desc" class="canva-text text-sm" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Experience before you buy</p>
+    </div>
+    <div data-template-id="why-card-6" class="canva-card card-hover p-6 rounded-2xl text-center" style="background: rgb(255, 255, 255);">
+     <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+      <i data-lucide="settings" class="w-7 h-7 text-electric"></i>
+     </div>
+     <h3 data-template-id="why-card-6-title" class="canva-text font-semibold mb-2" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 19px;">Genuine Spare Parts</h3>
+     <p data-template-id="why-card-6-desc" class="canva-text text-sm" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">100% authentic parts guaranteed</p>
+    </div>
+    <div data-template-id="why-card-7" class="canva-card card-hover p-6 rounded-2xl text-center" style="background: rgb(255, 255, 255);">
+     <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+      <i data-lucide="shield-check" class="w-7 h-7 text-electric"></i>
+     </div>
+     <h3 data-template-id="why-card-7-title" class="canva-text font-semibold mb-2" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 19px;">Warranty Support</h3>
+     <p data-template-id="why-card-7-desc" class="canva-text text-sm" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Comprehensive coverage for peace of mind</p>
+    </div>
+    <div data-template-id="why-card-8" class="canva-card card-hover p-6 rounded-2xl text-center" style="background: rgb(255, 255, 255);">
+     <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+      <i data-lucide="tool" class="w-7 h-7 text-electric"></i>
+     </div>
+     <h3 data-template-id="why-card-8-title" class="canva-text font-semibold mb-2" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 19px;">Professional Maintenance</h3>
+     <p data-template-id="why-card-8-desc" class="canva-text text-sm" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Scheduled service at your convenience</p>
+    </div>
+   </div>
+  </section><!-- Bike Categories -->
+  <section id="categories" class="w-full py-20 px-6 lg:px-12 bg-gray-50">
+   <div class="max-w-7xl mx-auto text-center mb-14">
+    <h2 data-template-id="cat-title" class="canva-text text-3xl md:text-4xl font-bold mb-4" style="color: rgb(34, 34, 34); font-weight: bold; font-style: normal; font-size: 24px;">Explore Bike Categories</h2>
+    <p data-template-id="cat-subtitle" class="canva-text text-gray-500 max-w-2xl mx-auto" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">From electric commuters to performance superbikes — find your perfect ride.</p>
+   </div>
+   <div class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="card-hover rounded-3xl overflow-hidden bg-white shadow-sm group">
+     <div class="h-48 overflow-hidden">
+      <img data-template-id="cat-electric-img" class="canva-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/9538579/pexels-photo-9538579.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Stylish black electric bike parked in a sleek urban environment at night">
+     </div>
+     <div class="p-5">
+      <h3 data-template-id="cat-electric-name" class="canva-text font-bold text-lg mb-1" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">Electric Bikes</h3>
+      <p data-template-id="cat-electric-desc" class="canva-text text-sm text-gray-500 mb-3" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Zero emissions, maximum performance</p><a href="#featured" class="text-electric text-sm font-semibold flex items-center gap-1">Explore <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+     </div>
+    </div>
+    <div class="card-hover rounded-3xl overflow-hidden bg-white shadow-sm group">
+     <div class="h-48 overflow-hidden">
+      <img data-template-id="cat-sports-img" class="canva-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/18293393/pexels-photo-18293393.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Dynamic image capturing a person riding a red Ducati motorbike at speed">
+     </div>
+     <div class="p-5">
+      <h3 data-template-id="cat-sports-name" class="canva-text font-bold text-lg mb-1" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">Sports Bikes</h3>
+      <p data-template-id="cat-sports-desc" class="canva-text text-sm text-gray-500 mb-3" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Built for speed and adrenaline</p><a href="#featured" class="text-electric text-sm font-semibold flex items-center gap-1">Explore <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+     </div>
+    </div>
+    <div class="card-hover rounded-3xl overflow-hidden bg-white shadow-sm group">
+     <div class="h-48 overflow-hidden">
+      <img data-template-id="cat-cruiser-img" class="canva-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/28513445/pexels-photo-28513445.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Vintage black motorcycle parked on a scenic open road during a sunny day">
+     </div>
+     <div class="p-5">
+      <h3 data-template-id="cat-cruiser-name" class="canva-text font-bold text-lg mb-1" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">Cruiser Bikes</h3>
+      <p data-template-id="cat-cruiser-desc" class="canva-text text-sm text-gray-500 mb-3" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Comfort meets style on the open road</p><a href="#featured" class="text-electric text-sm font-semibold flex items-center gap-1">Explore <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+     </div>
+    </div>
+    <div class="card-hover rounded-3xl overflow-hidden bg-white shadow-sm group">
+     <div class="h-48 overflow-hidden">
+      <img data-template-id="cat-adventure-img" class="canva-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/35476265/pexels-photo-35476265.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Adventure motorcyclist on rugged mountain terrain during daytime">
+     </div>
+     <div class="p-5">
+      <h3 data-template-id="cat-adventure-name" class="canva-text font-bold text-lg mb-1" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">Adventure Bikes</h3>
+      <p data-template-id="cat-adventure-desc" class="canva-text text-sm text-gray-500 mb-3" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Conquer any terrain with confidence</p><a href="#featured" class="text-electric text-sm font-semibold flex items-center gap-1">Explore <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+     </div>
+    </div>
+    <div class="card-hover rounded-3xl overflow-hidden bg-white shadow-sm group">
+     <div class="h-48 overflow-hidden">
+      <img data-template-id="cat-commuter-img" class="canva-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/20158568/pexels-photo-20158568.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A motorcyclist rides through a bustling city street">
+     </div>
+     <div class="p-5">
+      <h3 data-template-id="cat-commuter-name" class="canva-text font-bold text-lg mb-1" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">Commuter Bikes</h3>
+      <p data-template-id="cat-commuter-desc" class="canva-text text-sm text-gray-500 mb-3" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Efficient daily mobility solutions</p><a href="#featured" class="text-electric text-sm font-semibold flex items-center gap-1">Explore <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+     </div>
+    </div>
+    <div class="card-hover rounded-3xl overflow-hidden bg-white shadow-sm group">
+     <div class="h-48 overflow-hidden">
+      <img data-template-id="cat-scooter-img" class="canva-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/12747132/pexels-photo-12747132.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A vibrant scooter parked on a city street at night with skyscrapers">
+     </div>
+     <div class="p-5">
+      <h3 data-template-id="cat-scooter-name" class="canva-text font-bold text-lg mb-1" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">Premium Scooters</h3>
+      <p data-template-id="cat-scooter-desc" class="canva-text text-sm text-gray-500 mb-3" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Smart, stylish, and convenient</p><a href="#featured" class="text-electric text-sm font-semibold flex items-center gap-1">Explore <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+     </div>
+    </div>
+    <div class="card-hover rounded-3xl overflow-hidden bg-white shadow-sm group">
+     <div class="h-48 overflow-hidden">
+      <img data-template-id="cat-mountain-img" class="canva-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/32702012/pexels-photo-32702012.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Cyclist riding through a lush green forest on a sunny day">
+     </div>
+     <div class="p-5">
+      <h3 data-template-id="cat-mountain-name" class="canva-text font-bold text-lg mb-1" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">Mountain Bikes</h3>
+      <p data-template-id="cat-mountain-desc" class="canva-text text-sm text-gray-500 mb-3" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Trail-ready performance bicycles</p><a href="#featured" class="text-electric text-sm font-semibold flex items-center gap-1">Explore <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+     </div>
+    </div>
+    <div class="card-hover rounded-3xl overflow-hidden bg-white shadow-sm group">
+     <div class="h-48 overflow-hidden">
+      <img data-template-id="cat-city-img" class="canva-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/71096/pexels-photo-71096.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A young woman rides a bicycle quickly through a vibrant urban city">
+     </div>
+     <div class="p-5">
+      <h3 data-template-id="cat-city-name" class="canva-text font-bold text-lg mb-1" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">City Bikes</h3>
+      <p data-template-id="cat-city-desc" class="canva-text text-sm text-gray-500 mb-3" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Lightweight urban cycling made easy</p><a href="#featured" class="text-electric text-sm font-semibold flex items-center gap-1">Explore <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+     </div>
+    </div>
+    <div class="card-hover rounded-3xl overflow-hidden bg-white shadow-sm group">
+     <div class="h-48 overflow-hidden">
+      <img data-template-id="cat-performance-img" class="canva-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/17243638/pexels-photo-17243638.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Red Kawasaki Ninja ZX-6R superbike parked at a motorsport podium event">
+     </div>
+     <div class="p-5">
+      <h3 data-template-id="cat-performance-name" class="canva-text font-bold text-lg mb-1" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">Performance Bikes</h3>
+      <p data-template-id="cat-performance-desc" class="canva-text text-sm text-gray-500 mb-3" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Track-tuned for ultimate speed</p><a href="#featured" class="text-electric text-sm font-semibold flex items-center gap-1">Explore <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+     </div>
+    </div>
+   </div>
+  </section><!-- Featured Bikes -->
+  <section id="featured" class="w-full py-20 px-6 lg:px-12">
+   <div class="max-w-7xl mx-auto text-center mb-14">
+    <h2 data-template-id="featured-title" class="canva-text text-3xl md:text-4xl font-bold mb-4" style="color: rgb(34, 34, 34); font-weight: bold; font-style: normal; font-size: 24px;">Featured Bike Collection</h2>
+    <p data-template-id="featured-subtitle" class="canva-text text-gray-500 max-w-2xl mx-auto" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Handpicked premium models for every type of rider.</p>
+   </div><!-- Filter Bar -->
+   <div class="max-w-7xl mx-auto mb-10 flex flex-wrap gap-3 justify-center"><button class="filter-btn active px-5 py-2 rounded-full text-sm font-medium bg-electric text-white" data-filter="all">All Bikes</button> <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-electric hover:text-white transition-colors" data-filter="electric">Electric</button> <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-electric hover:text-white transition-colors" data-filter="sports">Sports</button> <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-electric hover:text-white transition-colors" data-filter="adventure">Adventure</button> <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-electric hover:text-white transition-colors" data-filter="commuter">Commuter</button>
+   </div>
+   <div id="bike-grid" class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Bike 1 -->
+    <div class="bike-card card-hover rounded-3xl bg-white shadow-sm border border-gray-100 overflow-hidden" data-category="electric">
+     <div class="h-56 overflow-hidden bg-gray-50">
+      <img data-template-id="bike-1-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/15009948/pexels-photo-15009948.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Modern foldable black electric bicycle displayed in a studio environment">
+     </div>
+     <div class="p-6"><span class="text-xs font-semibold text-electric bg-blue-50 px-3 py-1 rounded-full">Electric</span>
+      <h3 data-template-id="bike-1-name" class="canva-text font-bold text-xl mt-3 mb-2" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">Premium Electric Bike</h3>
+      <div class="grid grid-cols-2 gap-2 text-sm text-gray-500 mb-4"><span>🔋 72V 40Ah</span> <span>⚡ 150 km range</span> <span>🏎️ 90 km/h</span> <span>🔧 BLDC Motor</span>
+      </div>
+      <p data-template-id="bike-1-price" class="canva-text font-bold text-lg mb-4" style="color: rgb(0, 102, 255); font-weight: 700; font-style: normal; font-size: 16px;">₹60,000 – ₹2,00,000</p>
+      <div class="flex gap-3"><a href="#featured" class="flex-1 text-center py-2.5 rounded-xl bg-gray-100 text-sm font-semibold hover:bg-gray-200 transition-colors">View Details</a> <a href="#booking" class="flex-1 text-center py-2.5 rounded-xl bg-electric text-white text-sm font-semibold hover:bg-blue-700 transition-colors">Test Ride</a>
+      </div>
+     </div>
+    </div><!-- Bike 2 -->
+    <div class="bike-card card-hover rounded-3xl bg-white shadow-sm border border-gray-100 overflow-hidden" data-category="electric">
+     <div class="h-56 overflow-hidden bg-gray-50">
+      <img data-template-id="bike-2-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/36811567/pexels-photo-36811567.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Electric dirt bike parked on a riverside with mountains">
+     </div>
+     <div class="p-6"><span class="text-xs font-semibold text-electric bg-blue-50 px-3 py-1 rounded-full">Electric</span>
+      <h3 data-template-id="bike-2-name" class="canva-text font-bold text-xl mt-3 mb-2" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">Long Range E-Bike</h3>
+      <div class="grid grid-cols-2 gap-2 text-sm text-gray-500 mb-4"><span>🔋 96V 50Ah</span> <span>⚡ 200 km range</span> <span>🏎️ 120 km/h</span> <span>🔧 Mid-Drive</span>
+      </div>
+      <p data-template-id="bike-2-price" class="canva-text font-bold text-lg mb-4" style="color: rgb(0, 102, 255); font-weight: 700; font-style: normal; font-size: 16px;">₹90,000 – ₹3,00,000</p>
+      <div class="flex gap-3"><a href="#featured" class="flex-1 text-center py-2.5 rounded-xl bg-gray-100 text-sm font-semibold hover:bg-gray-200 transition-colors">View Details</a> <a href="#booking" class="flex-1 text-center py-2.5 rounded-xl bg-electric text-white text-sm font-semibold hover:bg-blue-700 transition-colors">Test Ride</a>
+      </div>
+     </div>
+    </div><!-- Bike 3 -->
+    <div class="bike-card card-hover rounded-3xl bg-white shadow-sm border border-gray-100 overflow-hidden" data-category="sports">
+     <div class="h-56 overflow-hidden bg-gray-50">
+      <img data-template-id="bike-3-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/23897248/pexels-photo-23897248.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A motorcyclist in black and red gear sits on a sleek sportbike">
+     </div>
+     <div class="p-6"><span class="text-xs font-semibold text-racing bg-red-50 px-3 py-1 rounded-full">Sports</span>
+      <h3 data-template-id="bike-3-name" class="canva-text font-bold text-xl mt-3 mb-2" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">Performance Sports Bike</h3>
+      <div class="grid grid-cols-2 gap-2 text-sm text-gray-500 mb-4"><span>🏍️ 600cc Twin</span> <span>⛽ 18L Tank</span> <span>🏎️ 180 km/h</span> <span>🔧 6-Speed</span>
+      </div>
+      <p data-template-id="bike-3-price" class="canva-text font-bold text-lg mb-4" style="color: rgb(0, 102, 255); font-weight: 700; font-style: normal; font-size: 16px;">₹1,50,000 – ₹8,00,000</p>
+      <div class="flex gap-3"><a href="#featured" class="flex-1 text-center py-2.5 rounded-xl bg-gray-100 text-sm font-semibold hover:bg-gray-200 transition-colors">View Details</a> <a href="#booking" class="flex-1 text-center py-2.5 rounded-xl bg-electric text-white text-sm font-semibold hover:bg-blue-700 transition-colors">Test Ride</a>
+      </div>
+     </div>
+    </div><!-- Bike 4 -->
+    <div class="bike-card card-hover rounded-3xl bg-white shadow-sm border border-gray-100 overflow-hidden" data-category="adventure">
+     <div class="h-56 overflow-hidden bg-gray-50">
+      <img data-template-id="bike-4-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/19045580/pexels-photo-19045580.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A motorcyclist in gear rests beside a packed KTM bike on a rural path">
+     </div>
+     <div class="p-6"><span class="text-xs font-semibold text-green-600 bg-green-50 px-3 py-1 rounded-full">Adventure</span>
+      <h3 data-template-id="bike-4-name" class="canva-text font-bold text-xl mt-3 mb-2" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">Adventure Touring Bike</h3>
+      <div class="grid grid-cols-2 gap-2 text-sm text-gray-500 mb-4"><span>🏍️ 800cc Parallel</span> <span>⛽ 20L Tank</span> <span>🏎️ 160 km/h</span> <span>🔧 ABS+TC</span>
+      </div>
+      <p data-template-id="bike-4-price" class="canva-text font-bold text-lg mb-4" style="color: rgb(0, 102, 255); font-weight: 700; font-style: normal; font-size: 16px;">₹2,00,000 – ₹12,00,000</p>
+      <div class="flex gap-3"><a href="#featured" class="flex-1 text-center py-2.5 rounded-xl bg-gray-100 text-sm font-semibold hover:bg-gray-200 transition-colors">View Details</a> <a href="#booking" class="flex-1 text-center py-2.5 rounded-xl bg-electric text-white text-sm font-semibold hover:bg-blue-700 transition-colors">Test Ride</a>
+      </div>
+     </div>
+    </div><!-- Bike 5 -->
+    <div class="bike-card card-hover rounded-3xl bg-white shadow-sm border border-gray-100 overflow-hidden" data-category="commuter">
+     <div class="h-56 overflow-hidden bg-gray-50">
+      <img data-template-id="bike-5-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/9230644/pexels-photo-9230644.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Confident woman riding an electric scooter in modern city environment">
+     </div>
+     <div class="p-6"><span class="text-xs font-semibold text-purple-600 bg-purple-50 px-3 py-1 rounded-full">Commuter</span>
+      <h3 data-template-id="bike-5-name" class="canva-text font-bold text-xl mt-3 mb-2" style="color: rgb(34, 34, 34); font-weight: 700; font-style: normal; font-size: 19px;">Smart Commuter Bike</h3>
+      <div class="grid grid-cols-2 gap-2 text-sm text-gray-500 mb-4"><span>🔋 48V 30Ah</span> <span>⚡ 80 km range</span> <span>🏎️ 60 km/h</span> <span>🔧 Hub Motor</span>
+      </div>
+      <p data-template-id="bike-5-price" class="canva-text font-bold text-lg mb-4" style="color: rgb(0, 102, 255); font-weight: 700; font-style: normal; font-size: 16px;">₹50,000 – ₹1,50,000</p>
+      <div class="flex gap-3"><a href="#featured" class="flex-1 text-center py-2.5 rounded-xl bg-gray-100 text-sm font-semibold hover:bg-gray-200 transition-colors">View Details</a> <a href="#booking" class="flex-1 text-center py-2.5 rounded-xl bg-electric text-white text-sm font-semibold hover:bg-blue-700 transition-colors">Test Ride</a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Test Ride Booking -->
+  <section id="booking" class="w-full py-20 px-6 lg:px-12 bg-navy">
+   <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+     <h2 data-template-id="booking-title" class="canva-text text-3xl md:text-4xl font-bold text-white mb-4" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 24px;">Book Your Free Test Ride</h2>
+     <p data-template-id="booking-subtitle" class="canva-text text-gray-300" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Experience the thrill before you buy. Schedule your ride today.</p>
+    </div>
+    <form id="booking-form" class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl">
+     <div class="grid md:grid-cols-2 gap-6">
+      <div><label for="b-name" class="text-sm font-medium text-gray-700 mb-1 block">Full Name</label> <input id="b-name" type="text" required="" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-electric focus:ring-2 focus:ring-blue-100 outline-none transition-all" placeholder="Your full name">
+      </div>
+      <div><label for="b-phone" class="text-sm font-medium text-gray-700 mb-1 block">Mobile Number</label> <input id="b-phone" type="tel" required="" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-electric focus:ring-2 focus:ring-blue-100 outline-none transition-all" placeholder="+91 XXXXX XXXXX">
+      </div>
+      <div><label for="b-email" class="text-sm font-medium text-gray-700 mb-1 block">Email</label> <input id="b-email" type="email" required="" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-electric focus:ring-2 focus:ring-blue-100 outline-none transition-all" placeholder="your@email.com">
+      </div>
+      <div><label for="b-bike" class="text-sm font-medium text-gray-700 mb-1 block">Preferred Bike Model</label> <select id="b-bike" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-electric focus:ring-2 focus:ring-blue-100 outline-none transition-all"> <option>Premium Electric Bike</option> <option>Long Range E-Bike</option> <option>Performance Sports Bike</option> <option>Adventure Touring Bike</option> <option>Smart Commuter Bike</option> </select>
+      </div>
+      <div><label for="b-date" class="text-sm font-medium text-gray-700 mb-1 block">Preferred Date</label> <input id="b-date" type="date" required="" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-electric focus:ring-2 focus:ring-blue-100 outline-none transition-all">
+      </div>
+      <div><label for="b-service" class="text-sm font-medium text-gray-700 mb-1 block">Service Type</label> <select id="b-service" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-electric focus:ring-2 focus:ring-blue-100 outline-none transition-all"> <option>Test Ride Booking</option> <option>EV Consultation</option> <option>Bike Financing</option> <option>Corporate Fleet Solutions</option> </select>
+      </div>
+     </div>
+     <div class="mt-6"><label for="b-msg" class="text-sm font-medium text-gray-700 mb-1 block">Message (Optional)</label> <textarea id="b-msg" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-electric focus:ring-2 focus:ring-blue-100 outline-none transition-all" placeholder="Any special requirements..."></textarea>
+     </div><button type="submit" data-template-id="booking-btn" class="canva-button mt-8 w-full py-4 rounded-xl font-bold text-lg transition-all hover:scale-[1.02]" style="background: rgb(0, 102, 255); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Book My Test Ride</button>
+     <div id="booking-success" class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 text-center font-medium">
+      ✅ Your test ride has been booked successfully! We'll contact you shortly.
+     </div>
+    </form>
+   </div>
+  </section><!-- Customer Reviews -->
+  <section id="reviews" class="w-full py-20 px-6 lg:px-12">
+   <div class="max-w-7xl mx-auto text-center mb-14">
+    <h2 data-template-id="reviews-title" class="canva-text text-3xl md:text-4xl font-bold mb-4" style="color: rgb(34, 34, 34); font-weight: bold; font-style: normal; font-size: 24px;">What Our Riders Say</h2>
+    <p data-template-id="reviews-subtitle" class="canva-text text-gray-500" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Trusted by 15,000+ happy riders across India.</p>
+   </div>
+   <div class="max-w-7xl mx-auto relative">
+    <div id="review-slider" class="grid md:grid-cols-3 gap-8">
+     <div class="bg-gray-50 rounded-3xl p-8">
+      <div class="flex items-center gap-4 mb-4"><img data-template-id="reviewer-1-img" class="canva-image w-14 h-14 rounded-full object-cover" loading="lazy" src="https://images.pexels.com/photos/7580994/pexels-photo-7580994.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Portrait of a confident man smiling">
+       <div>
+        <p data-template-id="reviewer-1-name" class="canva-text font-bold" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 16px;">Rahul Sharma</p>
+        <p class="text-yellow-400 text-sm">★★★★★</p>
+       </div>
+      </div>
+      <p data-template-id="review-1-text" class="canva-text text-gray-600 italic" style="color: rgb(107, 114, 128); font-weight: 400; font-style: italic; font-size: 16px;">Excellent performance and amazing riding experience. The team helped me find the perfect sports bike within my budget.</p>
+      <p data-template-id="review-1-bike" class="canva-text text-xs text-electric font-semibold mt-3" style="color: rgb(0, 102, 255); font-weight: 600; font-style: normal; font-size: 16px;">Purchased: Performance Sports Bike</p>
+     </div>
+     <div class="bg-gray-50 rounded-3xl p-8">
+      <div class="flex items-center gap-4 mb-4"><img data-template-id="reviewer-2-img" class="canva-image w-14 h-14 rounded-full object-cover" loading="lazy" src="https://images.pexels.com/photos/7580822/pexels-photo-7580822.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Confident woman in business attire smiling">
+       <div>
+        <p data-template-id="reviewer-2-name" class="canva-text font-bold" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 16px;">Priya Patel</p>
+        <p class="text-yellow-400 text-sm">★★★★★</p>
+       </div>
+      </div>
+      <p data-template-id="review-2-text" class="canva-text text-gray-600 italic" style="color: rgb(107, 114, 128); font-weight: 400; font-style: italic; font-size: 16px;">The electric bike range is impressive and perfect for daily commuting. Zero maintenance and great battery life!</p>
+      <p data-template-id="review-2-bike" class="canva-text text-xs text-electric font-semibold mt-3" style="color: rgb(0, 102, 255); font-weight: 600; font-style: normal; font-size: 16px;">Purchased: Premium Electric Bike</p>
+     </div>
+     <div class="bg-gray-50 rounded-3xl p-8">
+      <div class="flex items-center gap-4 mb-4"><img data-template-id="reviewer-3-img" class="canva-image w-14 h-14 rounded-full object-cover" loading="lazy" src="https://images.pexels.com/photos/6502290/pexels-photo-6502290.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Smiling South Asian man in casual attire outdoors">
+       <div>
+        <p data-template-id="reviewer-3-name" class="canva-text font-bold" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 16px;">Arjun Reddy</p>
+        <p class="text-yellow-400 text-sm">★★★★★</p>
+       </div>
+      </div>
+      <p data-template-id="review-3-text" class="canva-text text-gray-600 italic" style="color: rgb(107, 114, 128); font-weight: 400; font-style: italic; font-size: 16px;">Bought an adventure bike for my Ladakh trip. The financing options made it super affordable. Highly recommended!</p>
+      <p data-template-id="review-3-bike" class="canva-text text-xs text-electric font-semibold mt-3" style="color: rgb(0, 102, 255); font-weight: 600; font-style: normal; font-size: 16px;">Purchased: Adventure Touring Bike</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- Customization Services -->
+  <section class="w-full py-20 px-6 lg:px-12 bg-gray-50">
+   <div class="max-w-7xl mx-auto text-center mb-14">
+    <h2 data-template-id="custom-title" class="canva-text text-3xl md:text-4xl font-bold mb-4" style="color: rgb(34, 34, 34); font-weight: bold; font-style: normal; font-size: 24px;">Bike Customization Services</h2>
+    <p data-template-id="custom-subtitle" class="canva-text text-gray-500 max-w-2xl mx-auto" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Make your ride truly yours with our professional customization options.</p>
+   </div>
+   <div class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+    <div class="bg-white rounded-2xl p-6 text-center card-hover shadow-sm">
+     <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-3">
+      <i data-lucide="puzzle" class="w-6 h-6 text-electric"></i>
+     </div>
+     <p data-template-id="custom-1" class="canva-text text-sm font-semibold" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 16px;">Accessories Installation</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 text-center card-hover shadow-sm">
+     <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-3">
+      <i data-lucide="paintbrush" class="w-6 h-6 text-electric"></i>
+     </div>
+     <p data-template-id="custom-2" class="canva-text text-sm font-semibold" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 16px;">Custom Modifications</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 text-center card-hover shadow-sm">
+     <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-3">
+      <i data-lucide="gauge" class="w-6 h-6 text-electric"></i>
+     </div>
+     <p data-template-id="custom-3" class="canva-text text-sm font-semibold" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 16px;">Performance Upgrades</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 text-center card-hover shadow-sm">
+     <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-3">
+      <i data-lucide="shield" class="w-6 h-6 text-electric"></i>
+     </div>
+     <p data-template-id="custom-4" class="canva-text text-sm font-semibold" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 16px;">Safety Accessories</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 text-center card-hover shadow-sm">
+     <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-3">
+      <i data-lucide="luggage" class="w-6 h-6 text-electric"></i>
+     </div>
+     <p data-template-id="custom-5" class="canva-text text-sm font-semibold" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 16px;">Touring Setup</p>
+    </div>
+   </div>
+  </section><!-- Gallery -->
+  <section id="gallery" class="w-full py-20 px-6 lg:px-12">
+   <div class="max-w-7xl mx-auto text-center mb-14">
+    <h2 data-template-id="gallery-title" class="canva-text text-3xl md:text-4xl font-bold mb-4" style="color: rgb(34, 34, 34); font-weight: bold; font-style: normal; font-size: 24px;">Gallery</h2>
+   </div>
+   <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+    <div class="rounded-2xl overflow-hidden group row-span-1 md:row-span-2 col-span-1 md:col-span-2"><img data-template-id="gallery-1-img" class="canva-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/14529520/pexels-photo-14529520.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1280" alt="Five motorcyclists ride through a rugged desert canyon road">
+    </div>
+    <div class="rounded-2xl overflow-hidden group"><img data-template-id="gallery-2-img" class="canva-image w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/30445390/pexels-photo-30445390.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Close-up of a Ducati motorcycle display in a showroom">
+    </div>
+    <div class="rounded-2xl overflow-hidden group"><img data-template-id="gallery-3-img" class="canva-image w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/37807346/pexels-photo-37807346.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Electric scooter plugged into a charging station in a city">
+    </div>
+    <div class="rounded-2xl overflow-hidden group"><img data-template-id="gallery-4-img" class="canva-image w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/9607249/pexels-photo-9607249.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Smiling woman in a helmet enjoying a sunset ride on a motorcycle">
+    </div>
+    <div class="rounded-2xl overflow-hidden group col-span-2"><img data-template-id="gallery-5-img" class="canva-image w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/18351464/pexels-photo-18351464.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1280" alt="A sleek orange motorcycle displayed indoors by large windows">
+    </div>
+   </div>
+  </section><!-- FAQ -->
+  <section class="w-full py-20 px-6 lg:px-12 bg-gray-50">
+   <div class="max-w-3xl mx-auto">
+    <h2 data-template-id="faq-title" class="canva-text text-3xl md:text-4xl font-bold text-center mb-12" style="color: rgb(34, 34, 34); font-weight: bold; font-style: normal; font-size: 24px;">Frequently Asked Questions</h2>
+    <div class="space-y-4" id="faq-list">
+     <div class="faq-item bg-white rounded-2xl overflow-hidden shadow-sm"><button class="faq-toggle w-full flex items-center justify-between p-6 text-left font-semibold" aria-expanded="false"> <span data-template-id="faq-q1" class="canva-text" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 16px;">Do you offer free test rides?</span> <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform"></i> </button>
+      <div class="faq-answer hidden px-6 pb-6">
+       <p data-template-id="faq-a1" class="canva-text text-gray-600" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Yes! We offer complimentary test rides for all our bikes. Simply book online or walk into our showroom with a valid driving license.</p>
+      </div>
+     </div>
+     <div class="faq-item bg-white rounded-2xl overflow-hidden shadow-sm"><button class="faq-toggle w-full flex items-center justify-between p-6 text-left font-semibold" aria-expanded="false"> <span data-template-id="faq-q2" class="canva-text" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 16px;">Do you provide financing options?</span> <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform"></i> </button>
+      <div class="faq-answer hidden px-6 pb-6">
+       <p data-template-id="faq-a2" class="canva-text text-gray-600" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Absolutely. We partner with leading banks and NBFCs to offer flexible EMI plans starting at 0% interest for select models.</p>
+      </div>
+     </div>
+     <div class="faq-item bg-white rounded-2xl overflow-hidden shadow-sm"><button class="faq-toggle w-full flex items-center justify-between p-6 text-left font-semibold" aria-expanded="false"> <span data-template-id="faq-q3" class="canva-text" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 16px;">What is the battery warranty for electric bikes?</span> <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform"></i> </button>
+      <div class="faq-answer hidden px-6 pb-6">
+       <p data-template-id="faq-a3" class="canva-text text-gray-600" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Our electric bikes come with a 3-5 year battery warranty depending on the model, covering manufacturing defects and performance degradation.</p>
+      </div>
+     </div>
+     <div class="faq-item bg-white rounded-2xl overflow-hidden shadow-sm"><button class="faq-toggle w-full flex items-center justify-between p-6 text-left font-semibold" aria-expanded="false"> <span data-template-id="faq-q4" class="canva-text" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 16px;">Do you provide servicing and maintenance?</span> <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform"></i> </button>
+      <div class="faq-answer hidden px-6 pb-6">
+       <p data-template-id="faq-a4" class="canva-text text-gray-600" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Yes, we have a fully equipped service center with certified technicians. We offer scheduled maintenance plans and emergency support.</p>
+      </div>
+     </div>
+     <div class="faq-item bg-white rounded-2xl overflow-hidden shadow-sm"><button class="faq-toggle w-full flex items-center justify-between p-6 text-left font-semibold" aria-expanded="false"> <span data-template-id="faq-q5" class="canva-text" style="color: rgb(34, 34, 34); font-weight: 600; font-style: normal; font-size: 16px;">How long is the delivery time?</span> <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform"></i> </button>
+      <div class="faq-answer hidden px-6 pb-6">
+       <p data-template-id="faq-a5" class="canva-text text-gray-600" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">In-stock models can be delivered within 2-3 business days. Custom orders and special colors may take 2-4 weeks.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Contact -->
+  <section id="contact" class="w-full py-20 px-6 lg:px-12">
+   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
+    <div>
+     <h2 data-template-id="contact-title" class="canva-text text-3xl md:text-4xl font-bold mb-6" style="color: rgb(34, 34, 34); font-weight: bold; font-style: normal; font-size: 24px;">Visit Our Showroom</h2>
+     <p data-template-id="contact-desc" class="canva-text text-gray-500 mb-8" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">Experience our premium collection in person. Our expert team is ready to help you find your perfect ride.</p>
+     <div class="space-y-4">
+      <div class="flex items-center gap-4">
+       <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
+        <i data-lucide="map-pin" class="w-5 h-5 text-electric"></i>
+       </div>
+       <p data-template-id="contact-address" class="canva-text text-gray-600" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">MotoVerse Showroom, Bhubaneswar, Odisha, India</p>
+      </div>
+      <div class="flex items-center gap-4">
+       <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
+        <i data-lucide="phone" class="w-5 h-5 text-electric"></i>
+       </div>
+       <p data-template-id="contact-phone" class="canva-text text-gray-600" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">+91 XXXXX XXXXX</p>
+      </div>
+      <div class="flex items-center gap-4">
+       <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
+        <i data-lucide="mail" class="w-5 h-5 text-electric"></i>
+       </div>
+       <p data-template-id="contact-email" class="canva-text text-gray-600" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">contact@motoverse.in</p>
+      </div>
+      <div class="flex items-center gap-4">
+       <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
+        <i data-lucide="clock" class="w-5 h-5 text-electric"></i>
+       </div>
+       <p data-template-id="contact-hours" class="canva-text text-gray-600" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Monday – Sunday: 10 AM – 9 PM</p>
+      </div>
+     </div>
+    </div>
+    <div class="bg-gray-100 rounded-3xl h-80 flex items-center justify-center">
+     <div class="text-center text-gray-400"><i data-lucide="map" class="w-16 h-16 mx-auto mb-3"></i>
+      <p class="font-medium">Interactive Map</p>
+      <p class="text-sm">Visit our showroom</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- Footer -->
+  <footer data-template-id="footer-section" class="canva-footer w-full py-16 px-6 lg:px-12" style="background: rgb(16, 24, 40);">
+   <div class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+    <div>
+     <div class="flex items-center gap-2 mb-4">
+      <div class="w-8 h-8 bg-electric rounded-lg flex items-center justify-center">
+       <i data-lucide="bike" class="w-5 h-5 text-white"></i>
+      </div><span class="text-white font-bold text-lg">MotoVerse</span>
+     </div>
+     <p class="text-gray-400 text-sm">Premium bikes &amp; e-mobility solutions for the modern rider.</p>
+    </div>
+    <div>
+     <h4 class="text-white font-semibold mb-4">Categories</h4>
+     <ul class="space-y-2 text-sm text-gray-400">
+      <li>Electric Bikes</li>
+      <li>Sports Bikes</li>
+      <li>Adventure Bikes</li>
+      <li>Commuter Bikes</li>
+     </ul>
+    </div>
+    <div>
+     <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+     <ul class="space-y-2 text-sm text-gray-400">
+      <li>About Us</li>
+      <li>Test Ride</li>
+      <li>Financing</li>
+      <li>Service Center</li>
+     </ul>
+    </div>
+    <div>
+     <h4 class="text-white font-semibold mb-4">Newsletter</h4>
+     <p class="text-gray-400 text-sm mb-3">Get updates on new arrivals &amp; offers.</p>
+     <form id="newsletter-form" class="flex gap-2"><input type="email" placeholder="Your email" class="flex-1 px-4 py-2 rounded-xl bg-gray-800 border border-gray-700 text-white text-sm outline-none focus:border-electric"> <button type="submit" class="px-4 py-2 bg-electric rounded-xl text-white text-sm font-semibold hover:bg-blue-700 transition-colors">Join</button>
+     </form>
+    </div>
+   </div>
+   <div class="max-w-7xl mx-auto border-t border-gray-800 pt-8 text-center">
+    <p data-template-id="footer-copy" class="canva-text text-sm" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">© 2026 MotoVerse. All rights reserved. | Premium Bikes &amp; E-Mobility</p>
+   </div>
+  </footer><!-- Floating Buttons -->
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3"><button id="back-to-top" class="w-12 h-12 bg-electric text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform opacity-0 pointer-events-none" aria-label="Back to top"> <i data-lucide="arrow-up" class="w-5 h-5"></i> </button> <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" class="w-12 h-12 bg-green-500 text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform" aria-label="WhatsApp"> <i data-lucide="message-circle" class="w-5 h-5"></i> </a>
+  </div>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script>
+        // Sticky nav
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) navbar.classList.add('nav-sticky');
+            else navbar.classList.remove('nav-sticky');
+        });
+
+        // Mobile menu
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Back to top
+        const btt = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) { btt.classList.remove('opacity-0', 'pointer-events-none'); }
+            else { btt.classList.add('opacity-0', 'pointer-events-none'); }
+        });
+        btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Filter
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('bg-electric', 'text-white'); b.classList.add('bg-gray-100', 'text-gray-600'); });
+                btn.classList.add('bg-electric', 'text-white');
+                btn.classList.remove('bg-gray-100', 'text-gray-600');
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('.bike-card').forEach(card => {
+                    card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+                });
+            });
+        });
+
+        // FAQ
+        document.querySelectorAll('.faq-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const answer = btn.nextElementSibling;
+                const icon = btn.querySelector('[data-lucide]');
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', !expanded);
+                answer.classList.toggle('hidden');
+                icon.style.transform = expanded ? '' : 'rotate(180deg)';
+            });
+        });
+
+        // Booking form
+        document.getElementById('booking-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('booking-success').classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => document.getElementById('booking-success').classList.add('hidden'), 5000);
+        });
+
+        // Newsletter
+        document.getElementById('newsletter-form').addEventListener('submit', (e) => { e.preventDefault(); e.target.reset(); });
+
+        lucide.createIcons();
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a115a89370796068',t:'MTc4MjQwODE5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body></html>

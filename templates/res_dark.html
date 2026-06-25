@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en"><head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurum Fine Dining</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Raleway:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        black: '#080808',
+                        charcoal: '#181818',
+                        dbrown: '#241710',
+                        gold: '#D4AF37',
+                        ivory: '#F8F1E7',
+                        wine: '#8B1E3F'
+                    }
+                }
+            }
+        }
+    </script>
+  <style>
+        body { font-family: 'Raleway', sans-serif; }
+        h1,h2,h3,h4 { font-family: 'Playfair Display', serif; }
+        .glass-card {
+            background: rgba(24,24,24,0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212,175,55,0.3);
+            transition: all 0.4s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(212,175,55,0.8);
+            box-shadow: 0 0 30px rgba(212,175,55,0.15);
+        }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        nav.scrolled { background: rgba(8,8,8,0.95); backdrop-filter: blur(10px); }
+        .hero-overlay { background: linear-gradient(to bottom, rgba(8,8,8,0.6), rgba(8,8,8,0.85)); }
+    </style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root" class="bg-black text-ivory min-h-screen" style="background: rgb(8, 8, 8);"><!-- Navigation -->
+  <nav id="main-nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 py-4">
+   <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <h4 data-template-id="nav-logo" class="canva-text text-gold tracking-widest" style="color: rgb(212, 175, 55); font-weight: 700; font-style: normal; font-size: 22px;">AURUM</h4>
+    <div class="hidden md:flex gap-8 text-sm tracking-wider uppercase"><a href="#menu" class="text-ivory/80 hover:text-gold transition-colors">Menu</a> <a href="#chef" class="text-ivory/80 hover:text-gold transition-colors">Chef</a> <a href="#gallery" class="text-ivory/80 hover:text-gold transition-colors">Gallery</a> <a href="#reservation" class="text-ivory/80 hover:text-gold transition-colors">Reserve</a>
+    </div><button id="mobile-toggle" class="md:hidden text-gold"><i data-lucide="menu"></i></button>
+   </div>
+  </nav><!-- Hero -->
+  <header class="relative w-full" style="height: calc(100 * min(var(--vh, 1vh), 1vh));"><img data-template-id="hero-bg" class="canva-image absolute inset-0 w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/31615964/pexels-photo-31615964.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920" alt="Sophisticated table setting with wine glass, napkin, and cutlery in moody lighting">
+   <div class="hero-overlay absolute inset-0"></div>
+   <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
+    <h1 data-template-id="hero-headline" class="canva-text text-4xl md:text-6xl lg:text-7xl font-bold max-w-4xl leading-tight fade-in" style="color: rgb(248, 241, 231); font-weight: 700; font-style: normal; font-size: 32px;">A Culinary Experience Beyond Ordinary</h1>
+    <p data-template-id="hero-sub" class="canva-text mt-6 text-lg md:text-xl max-w-2xl opacity-80 fade-in" style="animation-delay: 0.2s; color: rgb(248, 241, 231); font-weight: 300; font-style: normal; font-size: 20px;">Where exquisite flavors meet luxury dining.</p>
+    <div class="flex flex-wrap gap-4 mt-10 fade-in" style="animation-delay:0.4s"><a href="#menu" data-template-id="cta-menu" class="canva-button px-8 py-3 border-2 border-gold text-gold hover:bg-gold hover:text-black transition-all tracking-wider uppercase text-sm" style="color: rgb(212, 175, 55); font-weight: 500; font-style: normal; font-size: 14px;">Explore Menu</a> <a href="#reservation" data-template-id="cta-book" class="canva-button px-8 py-3 bg-gold text-black hover:bg-gold/80 transition-all tracking-wider uppercase text-sm font-semibold" style="background: rgb(212, 175, 55); color: rgb(8, 8, 8); font-weight: 600; font-style: normal; font-size: 14px;">Book A Table</a>
+    </div>
+   </div>
+  </header><!-- Signature Menu -->
+  <section id="menu" class="py-24 px-6">
+   <div class="max-w-7xl mx-auto">
+    <h2 data-template-id="menu-title" class="canva-text text-center text-3xl md:text-4xl font-bold text-gold mb-4 fade-in" style="color: rgb(212, 175, 55); font-weight: 700; font-style: normal; font-size: 24px;">Signature Menu</h2>
+    <p data-template-id="menu-sub" class="canva-text text-center text-ivory/60 mb-16 fade-in" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 16px;">Curated masterpieces from our award-winning kitchen</p>
+    <div class="grid md:grid-cols-3 gap-8"><!-- Dish 1 -->
+     <div class="glass-card rounded-2xl overflow-hidden fade-in"><img data-template-id="dish-1-img" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/675951/pexels-photo-675951.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Delicious grilled steak with asparagus and tomato served with rich sauce on a plate">
+      <div class="p-6">
+       <h3 data-template-id="dish-1-name" class="canva-text text-xl font-semibold text-ivory mb-2" style="color: rgb(248, 241, 231); font-weight: 600; font-style: normal; font-size: 20px;">Wagyu Ribeye A5</h3>
+       <p data-template-id="dish-1-desc" class="canva-text text-ivory/60 text-sm mb-3" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 14px;">Japanese A5 wagyu, truffle jus, roasted asparagus, aged parmesan crisp</p>
+       <div class="flex items-center justify-between"><span data-template-id="dish-1-price" class="canva-text text-gold font-semibold" style="color: rgb(212, 175, 55); font-weight: 600; font-style: normal; font-size: 18px;">₹8,500</span> <span data-template-id="dish-1-badge" class="canva-tag text-xs bg-wine/30 text-wine px-2 py-1 rounded-full border border-wine/40" style="color: rgb(139, 30, 63); font-weight: 400; font-style: normal; font-size: 12px;">Chef's Choice</span>
+       </div>
+      </div>
+     </div><!-- Dish 2 -->
+     <div class="glass-card rounded-2xl overflow-hidden fade-in"><img data-template-id="dish-2-img" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/28052916/pexels-photo-28052916.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Elegant seafood dish featuring crab claws, lobster, and creative plating">
+      <div class="p-6">
+       <h3 data-template-id="dish-2-name" class="canva-text text-xl font-semibold text-ivory mb-2" style="color: rgb(248, 241, 231); font-weight: 600; font-style: normal; font-size: 20px;">Butter-Poached Lobster</h3>
+       <p data-template-id="dish-2-desc" class="canva-text text-ivory/60 text-sm mb-3" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 14px;">Maine lobster, saffron bisque, caviar pearls, microgreens</p>
+       <div class="flex items-center justify-between"><span data-template-id="dish-2-price" class="canva-text text-gold font-semibold" style="color: rgb(212, 175, 55); font-weight: 600; font-style: normal; font-size: 18px;">₹7,200</span> <span data-template-id="dish-2-badge" class="canva-tag text-xs bg-wine/30 text-wine px-2 py-1 rounded-full border border-wine/40" style="color: rgb(139, 30, 63); font-weight: 400; font-style: normal; font-size: 12px;">Signature</span>
+       </div>
+      </div>
+     </div><!-- Dish 3 -->
+     <div class="glass-card rounded-2xl overflow-hidden fade-in"><img data-template-id="dish-3-img" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/29040979/pexels-photo-29040979.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Close-up of luxurious chocolate desserts adorned with gold leaf">
+      <div class="p-6">
+       <h3 data-template-id="dish-3-name" class="canva-text text-xl font-semibold text-ivory mb-2" style="color: rgb(248, 241, 231); font-weight: 600; font-style: normal; font-size: 20px;">Valrhona Chocolate Sphere</h3>
+       <p data-template-id="dish-3-desc" class="canva-text text-ivory/60 text-sm mb-3" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 14px;">Dark chocolate ganache, 24k gold leaf, raspberry coulis, vanilla gelato</p>
+       <div class="flex items-center justify-between"><span data-template-id="dish-3-price" class="canva-text text-gold font-semibold" style="color: rgb(212, 175, 55); font-weight: 600; font-style: normal; font-size: 18px;">₹3,800</span> <span data-template-id="dish-3-badge" class="canva-tag text-xs bg-wine/30 text-wine px-2 py-1 rounded-full border border-wine/40" style="color: rgb(139, 30, 63); font-weight: 400; font-style: normal; font-size: 12px;">Indulgence</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Chef Story -->
+  <section id="chef" class="py-24 px-6 bg-charcoal">
+   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div class="fade-in"><img data-template-id="chef-img" class="canva-image w-full h-[500px] object-cover rounded-2xl" loading="lazy" src="https://images.pexels.com/photos/8093546/pexels-photo-8093546.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A professional chef stands confidently in a dimly lit kitchen with bamboo steamers and culinary tools">
+    </div>
+    <div class="fade-in">
+     <p data-template-id="chef-label" class="canva-text text-gold uppercase tracking-widest text-sm mb-4" style="color: rgb(212, 175, 55); font-weight: 500; font-style: normal; font-size: 13px;">The Artisan</p>
+     <h2 data-template-id="chef-name" class="canva-text text-3xl md:text-4xl font-bold text-ivory mb-6" style="color: rgb(248, 241, 231); font-weight: 700; font-style: normal; font-size: 24px;">Chef Arjun Malhotra</h2>
+     <p data-template-id="chef-bio" class="canva-text text-ivory/70 leading-relaxed mb-6" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 16px;">With over two decades of culinary mastery across Michelin-starred kitchens in Paris, Tokyo, and Mumbai, Chef Arjun brings a philosophy of respecting ingredients while pushing creative boundaries. Every plate tells a story of heritage and innovation.</p>
+     <p data-template-id="chef-quote" class="canva-text text-ivory/50 italic border-l-2 border-gold pl-4" style="color: rgb(248, 241, 231); font-weight: 400; font-style: italic; font-size: 16px;">"Cooking is not just technique — it is memory, emotion, and the courage to surprise."</p>
+    </div>
+   </div>
+  </section><!-- Wine Pairing -->
+  <section class="py-24 px-6">
+   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div class="order-2 md:order-1 fade-in">
+     <p data-template-id="wine-label" class="canva-text text-gold uppercase tracking-widest text-sm mb-4" style="color: rgb(212, 175, 55); font-weight: 500; font-style: normal; font-size: 13px;">Wine Cellar</p>
+     <h2 data-template-id="wine-title" class="canva-text text-3xl md:text-4xl font-bold text-ivory mb-6" style="color: rgb(248, 241, 231); font-weight: 700; font-style: normal; font-size: 24px;">Curated Wine Pairings</h2>
+     <p data-template-id="wine-desc" class="canva-text text-ivory/70 leading-relaxed" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 16px;">Our sommelier hand-selects wines from the world's most celebrated vineyards, crafting pairings that elevate each course into a multi-sensory journey. From bold Barolos to delicate Champagnes, every glass is an experience.</p>
+    </div>
+    <div class="order-1 md:order-2 fade-in"><img data-template-id="wine-img" class="canva-image w-full h-[450px] object-cover rounded-2xl" loading="lazy" src="https://images.pexels.com/photos/2702805/pexels-photo-2702805.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Elegant red wine pouring into a glass with a bottle in background">
+    </div>
+   </div>
+  </section><!-- Private Dining -->
+  <section class="py-24 px-6 bg-dbrown">
+   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div class="fade-in"><img data-template-id="private-img" class="canva-image w-full h-[400px] object-cover rounded-2xl" loading="lazy" src="https://images.pexels.com/photos/28059309/pexels-photo-28059309.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Luxurious dining room with an elegantly set candlelit table, perfect for special occasions">
+    </div>
+    <div class="fade-in">
+     <p data-template-id="private-label" class="canva-text text-gold uppercase tracking-widest text-sm mb-4" style="color: rgb(212, 175, 55); font-weight: 500; font-style: normal; font-size: 13px;">Exclusive Experiences</p>
+     <h2 data-template-id="private-title" class="canva-text text-3xl md:text-4xl font-bold text-ivory mb-6" style="color: rgb(248, 241, 231); font-weight: 700; font-style: normal; font-size: 24px;">Private Dining</h2>
+     <p data-template-id="private-desc" class="canva-text text-ivory/70 leading-relaxed" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 16px;">Celebrate life's most intimate moments in our private dining suites. With bespoke menus, dedicated service, and an ambiance of understated luxury, every occasion becomes extraordinary.</p>
+    </div>
+   </div>
+  </section><!-- Gallery -->
+  <section id="gallery" class="py-24 px-6">
+   <div class="max-w-7xl mx-auto">
+    <h2 data-template-id="gallery-title" class="canva-text text-center text-3xl md:text-4xl font-bold text-gold mb-16 fade-in" style="color: rgb(212, 175, 55); font-weight: 700; font-style: normal; font-size: 24px;">Gallery</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+     <div class="fade-in overflow-hidden rounded-xl">
+      <img data-template-id="gallery-1" class="canva-image w-full h-64 object-cover hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Stylish modern restaurant interior with warm lighting and luxurious ambiance">
+     </div>
+     <div class="fade-in overflow-hidden rounded-xl">
+      <img data-template-id="gallery-2" class="canva-image w-full h-64 object-cover hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A sophisticated restaurant interior with elegant table setting and ambient candlelight">
+     </div>
+     <div class="fade-in overflow-hidden rounded-xl">
+      <img data-template-id="gallery-3" class="canva-image w-full h-64 object-cover hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A chef artfully plating a gourmet dish with mushrooms and greens">
+     </div>
+     <div class="fade-in overflow-hidden rounded-xl">
+      <img data-template-id="gallery-4" class="canva-image w-full h-64 object-cover hover:scale-110 transition-transform duration-500" loading="lazy" src="https://images.pexels.com/photos/4992818/pexels-photo-4992818.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Gloomy banquet table with dark tableware decorated with compositions of dry branches and burning candles">
+     </div>
+    </div>
+   </div>
+  </section><!-- Reservation -->
+  <section id="reservation" class="py-24 px-6 bg-charcoal">
+   <div class="max-w-3xl mx-auto">
+    <h2 data-template-id="reserve-title" class="canva-text text-center text-3xl md:text-4xl font-bold text-gold mb-4 fade-in" style="color: rgb(212, 175, 55); font-weight: 700; font-style: normal; font-size: 24px;">Reserve Your Table</h2>
+    <p data-template-id="reserve-sub" class="canva-text text-center text-ivory/60 mb-12 fade-in" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 16px;">An unforgettable evening awaits</p>
+    <form id="reservation-form" class="glass-card rounded-2xl p-8 md:p-12 space-y-6 fade-in">
+     <div class="grid md:grid-cols-2 gap-6">
+      <div><label data-template-id="label-name" for="guest-name" class="canva-text block text-ivory/80 text-sm mb-2" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 14px;">Guest Name</label> <input id="guest-name" type="text" required="" class="w-full bg-black/50 border border-ivory/20 rounded-lg px-4 py-3 text-ivory focus:border-gold focus:outline-none transition-colors">
+      </div>
+      <div><label data-template-id="label-contact" for="guest-contact" class="canva-text block text-ivory/80 text-sm mb-2" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 14px;">Contact Number</label> <input id="guest-contact" type="tel" required="" class="w-full bg-black/50 border border-ivory/20 rounded-lg px-4 py-3 text-ivory focus:border-gold focus:outline-none transition-colors">
+      </div>
+      <div><label data-template-id="label-date" for="guest-date" class="canva-text block text-ivory/80 text-sm mb-2" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 14px;">Preferred Date</label> <input id="guest-date" type="date" required="" class="w-full bg-black/50 border border-ivory/20 rounded-lg px-4 py-3 text-ivory focus:border-gold focus:outline-none transition-colors">
+      </div>
+      <div><label data-template-id="label-time" for="guest-time" class="canva-text block text-ivory/80 text-sm mb-2" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 14px;">Preferred Time</label> <input id="guest-time" type="time" required="" class="w-full bg-black/50 border border-ivory/20 rounded-lg px-4 py-3 text-ivory focus:border-gold focus:outline-none transition-colors">
+      </div>
+      <div><label data-template-id="label-guests" for="guest-count" class="canva-text block text-ivory/80 text-sm mb-2" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 14px;">Number of Guests</label> <select id="guest-count" required="" class="w-full bg-black/50 border border-ivory/20 rounded-lg px-4 py-3 text-ivory focus:border-gold focus:outline-none transition-colors"> <option value="1">1 Guest</option> <option value="2" selected="">2 Guests</option> <option value="3">3 Guests</option> <option value="4">4 Guests</option> <option value="5">5 Guests</option> <option value="6">6+ Guests</option> </select>
+      </div>
+     </div>
+     <div><label data-template-id="label-request" for="guest-request" class="canva-text block text-ivory/80 text-sm mb-2" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 14px;">Special Requests</label> <textarea id="guest-request" rows="3" class="w-full bg-black/50 border border-ivory/20 rounded-lg px-4 py-3 text-ivory focus:border-gold focus:outline-none transition-colors resize-none"></textarea>
+     </div><button data-template-id="reserve-btn" type="submit" class="canva-button w-full py-4 bg-gold text-black font-semibold tracking-wider uppercase rounded-lg hover:bg-gold/80 transition-all" style="background: rgb(212, 175, 55); color: rgb(8, 8, 8); font-weight: 600; font-style: normal; font-size: 15px;">Reserve Your Exclusive Table</button>
+     <p id="form-success" class="hidden text-center text-gold mt-4">✓ Reservation confirmed. We look forward to welcoming you.</p>
+    </form>
+   </div>
+  </section><!-- Footer -->
+  <footer data-template-id="footer-section" class="canva-footer py-12 px-6 border-t border-ivory/10" style="background: rgb(8, 8, 8);">
+   <div class="max-w-7xl mx-auto text-center">
+    <h4 data-template-id="footer-name" class="canva-text text-gold text-2xl mb-4" style="color: rgb(212, 175, 55); font-weight: 700; font-style: normal; font-size: 16px;">AURUM</h4>
+    <p data-template-id="footer-address" class="canva-text text-ivory/50 text-sm mb-6" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 14px;">42 Connaught Place, New Delhi 110001  ·  +91 98765 43210</p>
+    <div class="flex justify-center gap-6 mb-6"><a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" class="text-ivory/50 hover:text-gold transition-colors"><i data-lucide="message-circle" style="width:20px;height:20px"></i></a> <a href="#" class="text-ivory/50 hover:text-gold transition-colors"><i data-lucide="instagram" style="width:20px;height:20px"></i></a> <a href="#" class="text-ivory/50 hover:text-gold transition-colors"><i data-lucide="phone" style="width:20px;height:20px"></i></a>
+    </div>
+    <p data-template-id="footer-copy" class="canva-text text-ivory/30 text-xs" style="color: rgb(248, 241, 231); font-weight: 400; font-style: normal; font-size: 12px;">© 2026 Aurum Fine Dining. All rights reserved.</p>
+   </div>
+  </footer>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script>
+        lucide.createIcons();
+
+        // Sticky nav
+        window.addEventListener('scroll', () => {
+            document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Intersection Observer for fade-in
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('visible'), i * 100);
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+        // Reservation form
+        document.getElementById('reservation-form').addEventListener('submit', e => {
+            e.preventDefault();
+            document.getElementById('form-success').classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => document.getElementById('form-success').classList.add('hidden'), 5000);
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a115af24a7846068',t:'MTc4MjQwODQ1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body></html>

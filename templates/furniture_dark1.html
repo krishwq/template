@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en"><head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Furniture Showroom</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=DM+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+        :root {
+            --black: #0B0B0B;
+            --charcoal: #171717;
+            --graphite: #242424;
+            --gold: #C8A45D;
+            --bronze: #9A7650;
+            --ivory: #F5F1EA;
+            --beige: #CFC5B8;
+        }
+        body { font-family: 'DM Sans', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .glass-card {
+            background: rgba(36, 36, 36, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(200, 164, 93, 0.15);
+        }
+        .gold-glow { box-shadow: 0 0 20px rgba(200, 164, 93, 0.1); }
+        .gold-glow:hover { box-shadow: 0 0 30px rgba(200, 164, 93, 0.25); border-color: rgba(200, 164, 93, 0.4); }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .hero-overlay { background: linear-gradient(135deg, rgba(11,11,11,0.85) 0%, rgba(11,11,11,0.5) 100%); }
+        .nav-scrolled { background: rgba(11, 11, 11, 0.95) !important; backdrop-filter: blur(10px); }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .float-anim { animation: float 4s ease-in-out infinite; }
+        .category-card:hover img { transform: scale(1.05); }
+        .category-card img { transition: transform 0.5s ease; }
+        input, textarea, select { background: rgba(36,36,36,0.8); border: 1px solid rgba(200,164,93,0.2); color: #F5F1EA; }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: #C8A45D; }
+        .testimonial-track { transition: transform 0.5s ease; }
+    </style>
+  <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        black: '#0B0B0B',
+                        charcoal: '#171717',
+                        graphite: '#242424',
+                        gold: '#C8A45D',
+                        bronze: '#9A7650',
+                        ivory: '#F5F1EA',
+                        beige: '#CFC5B8',
+                    }
+                }
+            }
+        }
+    </script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root" class="w-full min-h-screen text-ivory" style="background: rgb(11, 11, 11);"><!-- Navigation -->
+  <nav id="main-nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+    <h1 data-template-id="nav-logo" class="canva-text font-serif text-2xl text-gold" style="color: rgb(200, 164, 93); font-weight: 700; font-style: normal; font-size: 32px;">LUXE FURNISH</h1>
+    <div class="hidden lg:flex items-center gap-8"><a href="#about" class="text-beige hover:text-gold transition text-sm">About</a> <a href="#categories" class="text-beige hover:text-gold transition text-sm">Categories</a> <a href="#products" class="text-beige hover:text-gold transition text-sm">Collection</a> <a href="#consultation" class="text-beige hover:text-gold transition text-sm">Consultation</a> <a href="#gallery" class="text-beige hover:text-gold transition text-sm">Gallery</a> <a href="#contact" class="text-beige hover:text-gold transition text-sm">Contact</a>
+    </div><button id="mobile-menu-btn" class="lg:hidden text-gold" aria-label="Open menu"> <i data-lucide="menu" class="w-6 h-6"></i> </button>
+   </div>
+   <div id="mobile-menu" class="hidden lg:hidden bg-charcoal/95 backdrop-blur-md px-6 py-4 space-y-3"><a href="#about" class="block text-beige hover:text-gold">About</a> <a href="#categories" class="block text-beige hover:text-gold">Categories</a> <a href="#products" class="block text-beige hover:text-gold">Collection</a> <a href="#consultation" class="block text-beige hover:text-gold">Consultation</a> <a href="#gallery" class="block text-beige hover:text-gold">Gallery</a> <a href="#contact" class="block text-beige hover:text-gold">Contact</a>
+   </div>
+  </nav><!-- Hero Section -->
+  <header class="relative w-full" style="min-height: calc(100 * min(var(--vh, 1vh), 1vh));"><img data-template-id="hero-bg" class="canva-image absolute inset-0 w-full h-full object-cover" loading="eager" src="https://images.pexels.com/photos/13722886/pexels-photo-13722886.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920" alt="Sleek modern living room featuring dark tones and elegant furnishings with ambient lighting">
+   <div class="hero-overlay absolute inset-0"></div>
+   <div class="relative z-10 flex flex-col justify-center items-center text-center px-4 py-32" style="min-height: calc(100 * min(var(--vh, 1vh), 1vh));">
+    <h2 data-template-id="hero-headline" class="canva-text font-serif text-4xl md:text-6xl lg:text-7xl max-w-4xl leading-tight" style="color: rgb(245, 241, 234); font-weight: 700; font-style: normal; font-size: 24px;">Transform Your Space with Luxury Furniture Crafted for Life</h2>
+    <p data-template-id="hero-subheadline" class="canva-text mt-6 text-lg md:text-xl max-w-2xl" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Experience premium furniture designed with elegance, comfort, and timeless craftsmanship.</p>
+    <div class="flex flex-col sm:flex-row gap-4 mt-10"><a href="#products" data-template-id="hero-cta-1" class="canva-button px-8 py-4 rounded-full font-semibold text-sm uppercase tracking-wider transition hover:scale-105" style="background: rgb(200, 164, 93); color: rgb(11, 11, 11); font-weight: 600; font-style: normal; font-size: 16px;">Explore Luxury Collection</a> <a href="#consultation" data-template-id="hero-cta-2" class="canva-button px-8 py-4 rounded-full font-semibold text-sm uppercase tracking-wider border border-gold/50 hover:border-gold transition hover:scale-105" style="color: rgb(200, 164, 93); font-weight: 600; font-style: normal; font-size: 16px;">Book Private Consultation</a>
+    </div>
+   </div>
+  </header>
+  <main><!-- About Section -->
+   <section id="about" class="w-full py-20 lg:py-32 px-4">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center fade-in">
+     <div><img data-template-id="about-image" class="canva-image w-full h-80 lg:h-[500px] object-cover rounded-2xl" loading="lazy" src="https://images.pexels.com/photos/313776/pexels-photo-313776.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Carpenter focuses on woodworking project inside a busy workshop">
+     </div>
+     <div>
+      <p data-template-id="about-label" class="canva-text text-gold uppercase tracking-widest text-sm mb-3" style="color: rgb(200, 164, 93); font-weight: 400; font-style: normal; font-size: 16px;">Our Story</p>
+      <h2 data-template-id="about-title" class="canva-text font-serif text-3xl md:text-4xl mb-6" style="color: rgb(245, 241, 234); font-weight: 700; font-style: normal; font-size: 24px;">Crafting Luxury Furniture Since 2009</h2>
+      <p data-template-id="about-desc" class="canva-text leading-relaxed mb-8" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">For over 15 years, we've been dedicated to creating furniture that blends timeless elegance with modern comfort. Each piece is crafted by skilled artisans using premium materials, ensuring your home reflects the luxury you deserve.</p>
+      <div class="grid grid-cols-2 gap-4">
+       <div class="glass-card gold-glow rounded-xl p-5 text-center">
+        <p data-template-id="stat-1-num" class="canva-text font-serif text-2xl text-gold" style="color: rgb(200, 164, 93); font-weight: 700; font-style: normal; font-size: 16px;">10,000+</p>
+        <p data-template-id="stat-1-label" class="canva-text text-sm mt-1" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Happy Customers</p>
+       </div>
+       <div class="glass-card gold-glow rounded-xl p-5 text-center">
+        <p data-template-id="stat-2-num" class="canva-text font-serif text-2xl text-gold" style="color: rgb(200, 164, 93); font-weight: 700; font-style: normal; font-size: 16px;">2,000+</p>
+        <p data-template-id="stat-2-label" class="canva-text text-sm mt-1" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Furniture Designs</p>
+       </div>
+       <div class="glass-card gold-glow rounded-xl p-5 text-center">
+        <p data-template-id="stat-3-num" class="canva-text font-serif text-2xl text-gold" style="color: rgb(200, 164, 93); font-weight: 700; font-style: normal; font-size: 16px;">15+</p>
+        <p data-template-id="stat-3-label" class="canva-text text-sm mt-1" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Years Experience</p>
+       </div>
+       <div class="glass-card gold-glow rounded-xl p-5 text-center">
+        <p data-template-id="stat-4-num" class="canva-text font-serif text-2xl text-gold" style="color: rgb(200, 164, 93); font-weight: 700; font-style: normal; font-size: 16px;">100%</p>
+        <p data-template-id="stat-4-label" class="canva-text text-sm mt-1" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Quality Assurance</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Why Choose Us -->
+   <section class="w-full py-20 lg:py-32 px-4" style="background: #171717;">
+    <div class="max-w-7xl mx-auto text-center fade-in">
+     <p data-template-id="why-label" class="canva-text text-gold uppercase tracking-widest text-sm mb-3" style="color: rgb(200, 164, 93); font-weight: 400; font-style: normal; font-size: 16px;">Why Choose Us</p>
+     <h2 data-template-id="why-title" class="canva-text font-serif text-3xl md:text-4xl mb-12" style="color: rgb(245, 241, 234); font-weight: 700; font-style: normal; font-size: 24px;">The Premium Furniture Experience</h2>
+     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass-card gold-glow rounded-xl p-6 text-center transition">
+       <div class="text-gold text-3xl mb-3">
+        ✦
+       </div>
+       <h3 data-template-id="why-1-title" class="canva-text font-semibold mb-2" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Luxury Quality Materials</h3>
+       <p data-template-id="why-1-desc" class="canva-text text-sm" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Handpicked premium woods, fabrics, and metals for lasting beauty.</p>
+      </div>
+      <div class="glass-card gold-glow rounded-xl p-6 text-center transition">
+       <div class="text-gold text-3xl mb-3">
+        ✦
+       </div>
+       <h3 data-template-id="why-2-title" class="canva-text font-semibold mb-2" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Custom Designed</h3>
+       <p data-template-id="why-2-desc" class="canva-text text-sm" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Tailored to your space, style, and personality.</p>
+      </div>
+      <div class="glass-card gold-glow rounded-xl p-6 text-center transition">
+       <div class="text-gold text-3xl mb-3">
+        ✦
+       </div>
+       <h3 data-template-id="why-3-title" class="canva-text font-semibold mb-2" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Affordable Luxury</h3>
+       <p data-template-id="why-3-desc" class="canva-text text-sm" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Premium craftsmanship at competitive pricing.</p>
+      </div>
+      <div class="glass-card gold-glow rounded-xl p-6 text-center transition">
+       <div class="text-gold text-3xl mb-3">
+        ✦
+       </div>
+       <h3 data-template-id="why-4-title" class="canva-text font-semibold mb-2" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Safe Home Delivery</h3>
+       <p data-template-id="why-4-desc" class="canva-text text-sm" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">White-glove delivery service to your doorstep.</p>
+      </div>
+      <div class="glass-card gold-glow rounded-xl p-6 text-center transition">
+       <div class="text-gold text-3xl mb-3">
+        ✦
+       </div>
+       <h3 data-template-id="why-5-title" class="canva-text font-semibold mb-2" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Professional Installation</h3>
+       <p data-template-id="why-5-desc" class="canva-text text-sm" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Expert assembly and placement by our team.</p>
+      </div>
+      <div class="glass-card gold-glow rounded-xl p-6 text-center transition">
+       <div class="text-gold text-3xl mb-3">
+        ✦
+       </div>
+       <h3 data-template-id="why-6-title" class="canva-text font-semibold mb-2" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Long-Term Warranty</h3>
+       <p data-template-id="why-6-desc" class="canva-text text-sm" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Comprehensive warranty on all furniture pieces.</p>
+      </div>
+      <div class="glass-card gold-glow rounded-xl p-6 text-center transition">
+       <div class="text-gold text-3xl mb-3">
+        ✦
+       </div>
+       <h3 data-template-id="why-7-title" class="canva-text font-semibold mb-2" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Contemporary &amp; Classic</h3>
+       <p data-template-id="why-7-desc" class="canva-text text-sm" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Designs spanning modern minimal to timeless elegance.</p>
+      </div>
+      <div class="glass-card gold-glow rounded-xl p-6 text-center transition">
+       <div class="text-gold text-3xl mb-3">
+        ✦
+       </div>
+       <h3 data-template-id="why-8-title" class="canva-text font-semibold mb-2" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Dedicated Support</h3>
+       <p data-template-id="why-8-desc" class="canva-text text-sm" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Personal design consultants at your service.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Categories -->
+   <section id="categories" class="w-full py-20 lg:py-32 px-4">
+    <div class="max-w-7xl mx-auto fade-in">
+     <div class="text-center mb-12">
+      <p data-template-id="cat-label" class="canva-text text-gold uppercase tracking-widest text-sm mb-3" style="color: rgb(200, 164, 93); font-weight: 400; font-style: normal; font-size: 16px;">Browse Categories</p>
+      <h2 data-template-id="cat-title" class="canva-text font-serif text-3xl md:text-4xl" style="color: rgb(245, 241, 234); font-weight: 700; font-style: normal; font-size: 24px;">Our Luxury Collections</h2>
+     </div>
+     <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+      <div class="category-card group relative overflow-hidden rounded-2xl cursor-pointer"><img data-template-id="cat-beds-img" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/13722858/pexels-photo-13722858.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Contemporary bedroom design featuring dark tones and artistic wall decor">
+       <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
+        <h3 data-template-id="cat-beds-name" class="canva-text font-serif text-lg" style="color: rgb(245, 241, 234); font-weight: 400; font-style: normal; font-size: 19px;">Luxury Beds</h3>
+       </div>
+      </div>
+      <div class="category-card group relative overflow-hidden rounded-2xl cursor-pointer"><img data-template-id="cat-sofas-img" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/13722826/pexels-photo-13722826.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Elegant living room showcasing modern luxury design with ambient lighting">
+       <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
+        <h3 data-template-id="cat-sofas-name" class="canva-text font-serif text-lg" style="color: rgb(245, 241, 234); font-weight: 400; font-style: normal; font-size: 19px;">Designer Sofas</h3>
+       </div>
+      </div>
+      <div class="category-card group relative overflow-hidden rounded-2xl cursor-pointer"><img data-template-id="cat-dressing-img" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/7018392/pexels-photo-7018392.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Stylish vanity table under round mirror near armchair in bedroom">
+       <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
+        <h3 data-template-id="cat-dressing-name" class="canva-text font-serif text-lg" style="color: rgb(245, 241, 234); font-weight: 400; font-style: normal; font-size: 19px;">Dressing Tables</h3>
+       </div>
+      </div>
+      <div class="category-card group relative overflow-hidden rounded-2xl cursor-pointer"><img data-template-id="cat-study-img" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/667838/pexels-photo-667838.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Elegantly decorated home office with modern furniture">
+       <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
+        <h3 data-template-id="cat-study-name" class="canva-text font-serif text-lg" style="color: rgb(245, 241, 234); font-weight: 400; font-style: normal; font-size: 19px;">Study Tables</h3>
+       </div>
+      </div>
+      <div class="category-card group relative overflow-hidden rounded-2xl cursor-pointer"><img data-template-id="cat-dining-img" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/28059306/pexels-photo-28059306.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Warmly lit dining room with beautifully set table and modern decor">
+       <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
+        <h3 data-template-id="cat-dining-name" class="canva-text font-serif text-lg" style="color: rgb(245, 241, 234); font-weight: 400; font-style: normal; font-size: 19px;">Dining Collections</h3>
+       </div>
+      </div>
+      <div class="category-card group relative overflow-hidden rounded-2xl cursor-pointer"><img data-template-id="cat-wardrobes-img" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/27562211/pexels-photo-27562211.png?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Stylish walk-in closet with glass doors and elegant lighting">
+       <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
+        <h3 data-template-id="cat-wardrobes-name" class="canva-text font-serif text-lg" style="color: rgb(245, 241, 234); font-weight: 400; font-style: normal; font-size: 19px;">Designer Wardrobes</h3>
+       </div>
+      </div>
+      <div class="category-card group relative overflow-hidden rounded-2xl cursor-pointer"><img data-template-id="cat-tv-img" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/13141770/pexels-photo-13141770.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Spacious modern living room with sleek TV unit">
+       <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
+        <h3 data-template-id="cat-tv-name" class="canva-text font-serif text-lg" style="color: rgb(245, 241, 234); font-weight: 400; font-style: normal; font-size: 19px;">Luxury TV Units</h3>
+       </div>
+      </div>
+      <div class="category-card group relative overflow-hidden rounded-2xl cursor-pointer"><img data-template-id="cat-office-img" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Modern home office with wooden desk and ergonomic chair">
+       <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
+        <h3 data-template-id="cat-office-name" class="canva-text font-serif text-lg" style="color: rgb(245, 241, 234); font-weight: 400; font-style: normal; font-size: 19px;">Office Furniture</h3>
+       </div>
+      </div>
+      <div class="category-card group relative overflow-hidden rounded-2xl cursor-pointer"><img data-template-id="cat-bookshelves-img" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/2177482/pexels-photo-2177482.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Rustic bookshelf in cozy interior with books and plants">
+       <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
+        <h3 data-template-id="cat-bookshelves-name" class="canva-text font-serif text-lg" style="color: rgb(245, 241, 234); font-weight: 400; font-style: normal; font-size: 19px;">Bookshelves</h3>
+       </div>
+      </div>
+      <div class="category-card group relative overflow-hidden rounded-2xl cursor-pointer"><img data-template-id="cat-decor-img" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/8217302/pexels-photo-8217302.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Elegant ceramic vases and candle in minimalist style">
+       <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
+        <h3 data-template-id="cat-decor-name" class="canva-text font-serif text-lg" style="color: rgb(245, 241, 234); font-weight: 400; font-style: normal; font-size: 19px;">Home Décor</h3>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Featured Products -->
+   <section id="products" class="w-full py-20 lg:py-32 px-4" style="background: #171717;">
+    <div class="max-w-7xl mx-auto fade-in">
+     <div class="text-center mb-8">
+      <p data-template-id="prod-label" class="canva-text text-gold uppercase tracking-widest text-sm mb-3" style="color: rgb(200, 164, 93); font-weight: 400; font-style: normal; font-size: 16px;">Featured Collection</p>
+      <h2 data-template-id="prod-title" class="canva-text font-serif text-3xl md:text-4xl" style="color: rgb(245, 241, 234); font-weight: 700; font-style: normal; font-size: 24px;">Luxury Furniture Showcase</h2>
+     </div><!-- Filter -->
+     <div class="flex flex-wrap justify-center gap-3 mb-10"><button class="filter-btn active px-5 py-2 rounded-full text-sm border border-gold/30 bg-gold/10 text-gold transition hover:bg-gold/20" data-filter="all">All</button> <button class="filter-btn px-5 py-2 rounded-full text-sm border border-gold/30 text-beige transition hover:bg-gold/10 hover:text-gold" data-filter="bedroom">Bedroom</button> <button class="filter-btn px-5 py-2 rounded-full text-sm border border-gold/30 text-beige transition hover:bg-gold/10 hover:text-gold" data-filter="living">Living Room</button> <button class="filter-btn px-5 py-2 rounded-full text-sm border border-gold/30 text-beige transition hover:bg-gold/10 hover:text-gold" data-filter="office">Office</button>
+     </div>
+     <div id="product-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Product 1 -->
+      <div class="product-card glass-card gold-glow rounded-2xl overflow-hidden transition" data-category="bedroom"><img data-template-id="prod-1-img" class="canva-image w-full h-52 object-cover" loading="lazy" src="https://images.pexels.com/photos/37593719/pexels-photo-37593719.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Luxurious tufted bed headboard in a modern bedroom">
+       <div class="p-5">
+        <p class="text-gold text-xs uppercase tracking-wider mb-1">Bedroom Collection</p>
+        <h3 data-template-id="prod-1-name" class="canva-text font-serif text-lg mb-1" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Luxury King Size Bed</h3>
+        <p data-template-id="prod-1-price" class="canva-text text-gold font-semibold mb-2" style="color: rgb(200, 164, 93); font-weight: 600; font-style: normal; font-size: 16px;">₹25,000 – ₹85,000</p>
+        <p data-template-id="prod-1-desc" class="canva-text text-sm leading-relaxed mb-4" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Premium solid wood frame with velvet upholstered headboard. Available in Walnut, Mahogany &amp; Oak finishes.</p><button data-template-id="prod-1-btn" class="canva-button w-full py-3 rounded-full text-sm font-semibold uppercase tracking-wider transition hover:scale-[1.02]" style="background: rgb(200, 164, 93); color: rgb(11, 11, 11); font-weight: 600; font-style: normal; font-size: 16px;">Send Inquiry</button>
+       </div>
+      </div><!-- Product 2 -->
+      <div class="product-card glass-card gold-glow rounded-2xl overflow-hidden transition" data-category="living"><img data-template-id="prod-2-img" class="canva-image w-full h-52 object-cover" loading="lazy" src="https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Elegant living room featuring modern L-shaped sofa">
+       <div class="p-5">
+        <p class="text-gold text-xs uppercase tracking-wider mb-1">Living Room Collection</p>
+        <h3 data-template-id="prod-2-name" class="canva-text font-serif text-lg mb-1" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Luxury L-Shaped Sofa</h3>
+        <p data-template-id="prod-2-price" class="canva-text text-gold font-semibold mb-2" style="color: rgb(200, 164, 93); font-weight: 600; font-style: normal; font-size: 16px;">₹35,000 – ₹1,20,000</p>
+        <p data-template-id="prod-2-desc" class="canva-text text-sm leading-relaxed mb-4" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Premium fabric upholstery with high-density foam cushioning. Modular design with multiple configuration options.</p><button data-template-id="prod-2-btn" class="canva-button w-full py-3 rounded-full text-sm font-semibold uppercase tracking-wider transition hover:scale-[1.02]" style="background: rgb(200, 164, 93); color: rgb(11, 11, 11); font-weight: 600; font-style: normal; font-size: 16px;">Send Inquiry</button>
+       </div>
+      </div><!-- Product 3 -->
+      <div class="product-card glass-card gold-glow rounded-2xl overflow-hidden transition" data-category="office"><img data-template-id="prod-3-img" class="canva-image w-full h-52 object-cover" loading="lazy" src="https://images.pexels.com/photos/7195522/pexels-photo-7195522.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Sleek office setup with designer chair and geometric desk">
+       <div class="p-5">
+        <p class="text-gold text-xs uppercase tracking-wider mb-1">Office Collection</p>
+        <h3 data-template-id="prod-3-name" class="canva-text font-serif text-lg mb-1" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Ergonomic Office Chair</h3>
+        <p data-template-id="prod-3-price" class="canva-text text-gold font-semibold mb-2" style="color: rgb(200, 164, 93); font-weight: 600; font-style: normal; font-size: 16px;">₹6,000 – ₹25,000</p>
+        <p data-template-id="prod-3-desc" class="canva-text text-sm leading-relaxed mb-4" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Breathable mesh back with lumbar support. Adjustable armrests, height, and tilt mechanism.</p><button data-template-id="prod-3-btn" class="canva-button w-full py-3 rounded-full text-sm font-semibold uppercase tracking-wider transition hover:scale-[1.02]" style="background: rgb(200, 164, 93); color: rgb(11, 11, 11); font-weight: 600; font-style: normal; font-size: 16px;">Send Inquiry</button>
+       </div>
+      </div><!-- Product 4 -->
+      <div class="product-card glass-card gold-glow rounded-2xl overflow-hidden transition" data-category="bedroom"><img data-template-id="prod-4-img" class="canva-image w-full h-52 object-cover" loading="lazy" src="https://images.pexels.com/photos/27562211/pexels-photo-27562211.png?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Stylish walk-in closet with glass doors">
+       <div class="p-5">
+        <p class="text-gold text-xs uppercase tracking-wider mb-1">Bedroom Collection</p>
+        <h3 data-template-id="prod-4-name" class="canva-text font-serif text-lg mb-1" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Premium Wooden Wardrobe</h3>
+        <p data-template-id="prod-4-price" class="canva-text text-gold font-semibold mb-2" style="color: rgb(200, 164, 93); font-weight: 600; font-style: normal; font-size: 16px;">₹18,000 – ₹70,000</p>
+        <p data-template-id="prod-4-desc" class="canva-text text-sm leading-relaxed mb-4" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Solid teak wood construction with soft-close hinges. Multiple compartments and mirror panel options.</p><button data-template-id="prod-4-btn" class="canva-button w-full py-3 rounded-full text-sm font-semibold uppercase tracking-wider transition hover:scale-[1.02]" style="background: rgb(200, 164, 93); color: rgb(11, 11, 11); font-weight: 600; font-style: normal; font-size: 16px;">Send Inquiry</button>
+       </div>
+      </div><!-- Product 5 -->
+      <div class="product-card glass-card gold-glow rounded-2xl overflow-hidden transition" data-category="living"><img data-template-id="prod-5-img" class="canva-image w-full h-52 object-cover" loading="lazy" src="https://images.pexels.com/photos/7607461/pexels-photo-7607461.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Minimalist wooden coffee table with vase and marble candle holder">
+       <div class="p-5">
+        <p class="text-gold text-xs uppercase tracking-wider mb-1">Living Room Collection</p>
+        <h3 data-template-id="prod-5-name" class="canva-text font-serif text-lg mb-1" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Designer Coffee Table</h3>
+        <p data-template-id="prod-5-price" class="canva-text text-gold font-semibold mb-2" style="color: rgb(200, 164, 93); font-weight: 600; font-style: normal; font-size: 16px;">₹5,000 – ₹25,000</p>
+        <p data-template-id="prod-5-desc" class="canva-text text-sm leading-relaxed mb-4" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Solid wood top with brass-finished metal legs. Contemporary design perfect for modern living spaces.</p><button data-template-id="prod-5-btn" class="canva-button w-full py-3 rounded-full text-sm font-semibold uppercase tracking-wider transition hover:scale-[1.02]" style="background: rgb(200, 164, 93); color: rgb(11, 11, 11); font-weight: 600; font-style: normal; font-size: 16px;">Send Inquiry</button>
+       </div>
+      </div><!-- Product 6 -->
+      <div class="product-card glass-card gold-glow rounded-2xl overflow-hidden transition" data-category="office"><img data-template-id="prod-6-img" class="canva-image w-full h-52 object-cover" loading="lazy" src="https://images.pexels.com/photos/2883049/pexels-photo-2883049.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Stylish office space featuring a wooden bookshelf and minimalist desk">
+       <div class="p-5">
+        <p class="text-gold text-xs uppercase tracking-wider mb-1">Office Collection</p>
+        <h3 data-template-id="prod-6-name" class="canva-text font-serif text-lg mb-1" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Premium Wooden Bookshelf</h3>
+        <p data-template-id="prod-6-price" class="canva-text text-gold font-semibold mb-2" style="color: rgb(200, 164, 93); font-weight: 600; font-style: normal; font-size: 16px;">₹7,000 – ₹35,000</p>
+        <p data-template-id="prod-6-desc" class="canva-text text-sm leading-relaxed mb-4" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Engineered wood with natural veneer finish. Open shelf design with adjustable compartments.</p><button data-template-id="prod-6-btn" class="canva-button w-full py-3 rounded-full text-sm font-semibold uppercase tracking-wider transition hover:scale-[1.02]" style="background: rgb(200, 164, 93); color: rgb(11, 11, 11); font-weight: 600; font-style: normal; font-size: 16px;">Send Inquiry</button>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Testimonials -->
+   <section class="w-full py-20 lg:py-32 px-4 overflow-hidden">
+    <div class="max-w-7xl mx-auto fade-in">
+     <div class="text-center mb-12">
+      <p data-template-id="test-label" class="canva-text text-gold uppercase tracking-widest text-sm mb-3" style="color: rgb(200, 164, 93); font-weight: 400; font-style: normal; font-size: 16px;">Testimonials</p>
+      <h2 data-template-id="test-title" class="canva-text font-serif text-3xl md:text-4xl" style="color: rgb(245, 241, 234); font-weight: 700; font-style: normal; font-size: 24px;">What Our Customers Say</h2>
+     </div>
+     <div class="relative">
+      <div id="testimonial-viewport" class="overflow-hidden">
+       <div id="testimonial-track" class="testimonial-track flex">
+        <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-3">
+         <div class="glass-card rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-4"><img data-template-id="test-1-avatar" class="canva-image w-12 h-12 rounded-full object-cover" loading="lazy" src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Portrait of a happy man">
+           <div>
+            <p data-template-id="test-1-name" class="canva-text font-semibold text-sm" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 16px;">Rajesh Kumar</p>
+            <p class="text-gold text-sm">★★★★★</p>
+           </div>
+          </div>
+          <p data-template-id="test-1-text" class="canva-text text-sm leading-relaxed" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Exceptional craftsmanship and premium finishing. The sofa transformed our living space into a luxury retreat.</p>
+         </div>
+        </div>
+        <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-3">
+         <div class="glass-card rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-4"><img data-template-id="test-2-avatar" class="canva-image w-12 h-12 rounded-full object-cover" loading="lazy" src="https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Professional woman smiling">
+           <div>
+            <p data-template-id="test-2-name" class="canva-text font-semibold text-sm" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 16px;">Priya Sharma</p>
+            <p class="text-gold text-sm">★★★★★</p>
+           </div>
+          </div>
+          <p data-template-id="test-2-text" class="canva-text text-sm leading-relaxed" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Elegant designs, excellent service, and smooth delivery experience. The wardrobe perfectly matched our interiors.</p>
+         </div>
+        </div>
+        <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-3">
+         <div class="glass-card rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-4"><img data-template-id="test-3-avatar" class="canva-image w-12 h-12 rounded-full object-cover" loading="lazy" src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Portrait of a smiling young man">
+           <div>
+            <p data-template-id="test-3-name" class="canva-text font-semibold text-sm" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 16px;">Amit Patel</p>
+            <p class="text-gold text-sm">★★★★★</p>
+           </div>
+          </div>
+          <p data-template-id="test-3-text" class="canva-text text-sm leading-relaxed" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">The customized study table exceeded our expectations. Premium quality at a reasonable price point.</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Consultation -->
+   <section id="consultation" class="w-full py-20 lg:py-32 px-4" style="background: #171717;">
+    <div class="max-w-3xl mx-auto fade-in">
+     <div class="text-center mb-10">
+      <p data-template-id="consult-label" class="canva-text text-gold uppercase tracking-widest text-sm mb-3" style="color: rgb(200, 164, 93); font-weight: 400; font-style: normal; font-size: 16px;">Book Now</p>
+      <h2 data-template-id="consult-title" class="canva-text font-serif text-3xl md:text-4xl mb-3" style="color: rgb(245, 241, 234); font-weight: 700; font-style: normal; font-size: 24px;">Book Your Free Interior Consultation</h2>
+      <p data-template-id="consult-desc" class="canva-text" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Let our expert designers help you create the perfect space.</p>
+     </div>
+     <form id="consultation-form" class="glass-card rounded-2xl p-8 space-y-5">
+      <div class="grid sm:grid-cols-2 gap-5">
+       <div><label data-template-id="form-name-label" for="c-name" class="canva-text text-sm mb-1 block" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Full Name</label> <input id="c-name" type="text" class="w-full px-4 py-3 rounded-lg" required="">
+       </div>
+       <div><label data-template-id="form-phone-label" for="c-phone" class="canva-text text-sm mb-1 block" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Mobile Number</label> <input id="c-phone" type="tel" class="w-full px-4 py-3 rounded-lg" required="">
+       </div>
+      </div>
+      <div><label data-template-id="form-email-label" for="c-email" class="canva-text text-sm mb-1 block" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Email Address</label> <input id="c-email" type="email" class="w-full px-4 py-3 rounded-lg" required="">
+      </div>
+      <div><label data-template-id="form-interest-label" for="c-interest" class="canva-text text-sm mb-1 block" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Furniture Interest</label> <select id="c-interest" class="w-full px-4 py-3 rounded-lg"> <option value="">Select interest</option> <option>Luxury Home Furniture</option> <option>Interior Design Guidance</option> <option>Custom Furniture Planning</option> <option>Corporate Furniture Solutions</option> </select>
+      </div>
+      <div><label data-template-id="form-msg-label" for="c-msg" class="canva-text text-sm mb-1 block" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Message</label> <textarea id="c-msg" rows="4" class="w-full px-4 py-3 rounded-lg"></textarea>
+      </div><button data-template-id="form-submit-btn" type="submit" class="canva-button w-full py-4 rounded-full font-semibold uppercase tracking-wider transition hover:scale-[1.02]" style="background: rgb(200, 164, 93); color: rgb(11, 11, 11); font-weight: 700; font-style: normal; font-size: 16px;">Book Free Consultation</button>
+      <p id="form-success" class="hidden text-green-400 text-center text-sm mt-3">Thank you! We'll contact you shortly.</p>
+     </form>
+    </div>
+   </section><!-- Gallery -->
+   <section id="gallery" class="w-full py-20 lg:py-32 px-4">
+    <div class="max-w-7xl mx-auto fade-in">
+     <div class="text-center mb-12">
+      <p data-template-id="gallery-label" class="canva-text text-gold uppercase tracking-widest text-sm mb-3" style="color: rgb(200, 164, 93); font-weight: 400; font-style: normal; font-size: 16px;">Inspiration</p>
+      <h2 data-template-id="gallery-title" class="canva-text font-serif text-3xl md:text-4xl" style="color: rgb(245, 241, 234); font-weight: 700; font-style: normal; font-size: 24px;">Luxury Interior Gallery</h2>
+     </div>
+     <div class="columns-2 md:columns-3 gap-4 space-y-4">
+      <div class="overflow-hidden rounded-xl group"><img data-template-id="gallery-1" class="canva-image w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" src="https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Sleek living room with modern furniture and minimalist decor">
+      </div>
+      <div class="overflow-hidden rounded-xl group"><img data-template-id="gallery-2" class="canva-image w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" src="canva://MAGy76oP-NA/1" alt="Modern bedroom featuring elegant decor and natural lighting">
+      </div>
+      <div class="overflow-hidden rounded-xl group"><img data-template-id="gallery-3" class="canva-image w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" src="https://images.pexels.com/photos/13722865/pexels-photo-13722865.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Stylish modern office setup with sleek desk and ambient lighting">
+      </div>
+      <div class="overflow-hidden rounded-xl group"><img data-template-id="gallery-4" class="canva-image w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" src="https://images.pexels.com/photos/8775038/pexels-photo-8775038.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Modern dining table with elegant decor in a dark-toned room">
+      </div>
+      <div class="overflow-hidden rounded-xl group"><img data-template-id="gallery-5" class="canva-image w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" src="https://images.pexels.com/photos/13722878/pexels-photo-13722878.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Sleek modern kitchen with dark theme and illuminated cabinets">
+      </div>
+     </div>
+    </div>
+   </section><!-- FAQ -->
+   <section class="w-full py-20 lg:py-32 px-4" style="background: #171717;">
+    <div class="max-w-3xl mx-auto fade-in">
+     <div class="text-center mb-12">
+      <h2 data-template-id="faq-title" class="canva-text font-serif text-3xl md:text-4xl" style="color: rgb(245, 241, 234); font-weight: 700; font-style: normal; font-size: 24px;">Frequently Asked Questions</h2>
+     </div>
+     <div class="space-y-3" id="faq-container">
+      <div class="faq-item glass-card rounded-xl overflow-hidden"><button class="faq-toggle w-full flex justify-between items-center p-5 text-left" aria-expanded="false"> <span data-template-id="faq-1-q" class="canva-text font-medium" style="color: rgb(245, 241, 234); font-weight: 500; font-style: normal; font-size: 16px;">Do you provide home delivery?</span> <i data-lucide="chevron-down" class="w-5 h-5 text-gold transition-transform"></i> </button>
+       <div class="faq-answer hidden px-5 pb-5">
+        <p data-template-id="faq-1-a" class="canva-text text-sm leading-relaxed" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Yes, we provide white-glove delivery service across India. Our team ensures safe transportation and careful placement of your furniture.</p>
+       </div>
+      </div>
+      <div class="faq-item glass-card rounded-xl overflow-hidden"><button class="faq-toggle w-full flex justify-between items-center p-5 text-left" aria-expanded="false"> <span data-template-id="faq-2-q" class="canva-text font-medium" style="color: rgb(245, 241, 234); font-weight: 500; font-style: normal; font-size: 16px;">Can furniture be customized?</span> <i data-lucide="chevron-down" class="w-5 h-5 text-gold transition-transform"></i> </button>
+       <div class="faq-answer hidden px-5 pb-5">
+        <p data-template-id="faq-2-a" class="canva-text text-sm leading-relaxed" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Absolutely! We specialize in custom furniture. Choose your materials, dimensions, colors, and finishes to create pieces that perfectly match your space.</p>
+       </div>
+      </div>
+      <div class="faq-item glass-card rounded-xl overflow-hidden"><button class="faq-toggle w-full flex justify-between items-center p-5 text-left" aria-expanded="false"> <span data-template-id="faq-3-q" class="canva-text font-medium" style="color: rgb(245, 241, 234); font-weight: 500; font-style: normal; font-size: 16px;">Do you offer professional installation?</span> <i data-lucide="chevron-down" class="w-5 h-5 text-gold transition-transform"></i> </button>
+       <div class="faq-answer hidden px-5 pb-5">
+        <p data-template-id="faq-3-a" class="canva-text text-sm leading-relaxed" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Yes, all our furniture comes with complimentary professional installation by our trained team to ensure perfect setup.</p>
+       </div>
+      </div>
+      <div class="faq-item glass-card rounded-xl overflow-hidden"><button class="faq-toggle w-full flex justify-between items-center p-5 text-left" aria-expanded="false"> <span data-template-id="faq-4-q" class="canva-text font-medium" style="color: rgb(245, 241, 234); font-weight: 500; font-style: normal; font-size: 16px;">What warranty is provided?</span> <i data-lucide="chevron-down" class="w-5 h-5 text-gold transition-transform"></i> </button>
+       <div class="faq-answer hidden px-5 pb-5">
+        <p data-template-id="faq-4-a" class="canva-text text-sm leading-relaxed" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">We provide a comprehensive warranty ranging from 2-10 years depending on the product category, covering manufacturing defects and structural issues.</p>
+       </div>
+      </div>
+      <div class="faq-item glass-card rounded-xl overflow-hidden"><button class="faq-toggle w-full flex justify-between items-center p-5 text-left" aria-expanded="false"> <span data-template-id="faq-5-q" class="canva-text font-medium" style="color: rgb(245, 241, 234); font-weight: 500; font-style: normal; font-size: 16px;">What is the delivery timeline?</span> <i data-lucide="chevron-down" class="w-5 h-5 text-gold transition-transform"></i> </button>
+       <div class="faq-answer hidden px-5 pb-5">
+        <p data-template-id="faq-5-a" class="canva-text text-sm leading-relaxed" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Ready-made pieces are delivered within 7-14 days. Custom furniture typically takes 3-6 weeks depending on complexity and materials chosen.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact -->
+   <section id="contact" class="w-full py-20 lg:py-32 px-4">
+    <div class="max-w-7xl mx-auto fade-in">
+     <div class="text-center mb-12">
+      <h2 data-template-id="contact-title" class="canva-text font-serif text-3xl md:text-4xl" style="color: rgb(245, 241, 234); font-weight: 700; font-style: normal; font-size: 24px;">Visit Our Showroom</h2>
+     </div>
+     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass-card gold-glow rounded-xl p-6 text-center">
+       <div class="text-gold text-2xl mb-3">
+        📍
+       </div>
+       <h3 data-template-id="contact-address-title" class="canva-text font-semibold mb-2" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Location</h3>
+       <p data-template-id="contact-address" class="canva-text text-sm" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Premium Furniture Hub, MG Road, Bhubaneswar, Odisha</p>
+      </div>
+      <div class="glass-card gold-glow rounded-xl p-6 text-center">
+       <div class="text-gold text-2xl mb-3">
+        📞
+       </div>
+       <h3 data-template-id="contact-phone-title" class="canva-text font-semibold mb-2" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Call Us</h3>
+       <p data-template-id="contact-phone" class="canva-text text-sm" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">+91 XXXXX XXXXX</p>
+      </div>
+      <div class="glass-card gold-glow rounded-xl p-6 text-center">
+       <div class="text-gold text-2xl mb-3">
+        📧
+       </div>
+       <h3 data-template-id="contact-email-title" class="canva-text font-semibold mb-2" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Email</h3>
+       <p data-template-id="contact-email" class="canva-text text-sm" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">contact@luxefurnish.com</p>
+      </div>
+      <div class="glass-card gold-glow rounded-xl p-6 text-center">
+       <div class="text-gold text-2xl mb-3">
+        🕒
+       </div>
+       <h3 data-template-id="contact-hours-title" class="canva-text font-semibold mb-2" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 19px;">Working Hours</h3>
+       <p data-template-id="contact-hours" class="canva-text text-sm" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Mon – Sun: 10 AM – 9 PM</p>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main><!-- Footer -->
+  <footer data-template-id="footer-section" class="canva-footer w-full py-16 px-4 border-t border-gold/10" style="background: rgb(11, 11, 11);">
+   <div class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+    <div>
+     <h3 data-template-id="footer-brand" class="canva-text font-serif text-xl text-gold mb-4" style="color: rgb(200, 164, 93); font-weight: 700; font-style: normal; font-size: 19px;">LUXE FURNISH</h3>
+     <p data-template-id="footer-desc" class="canva-text text-sm leading-relaxed" style="color: rgb(207, 197, 184); font-weight: 400; font-style: normal; font-size: 16px;">Crafting luxury furniture experiences since 2009. Premium quality, timeless designs, and exceptional service.</p>
+    </div>
+    <div>
+     <h4 data-template-id="footer-links-title" class="canva-text font-semibold mb-4" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 16px;">Quick Links</h4>
+     <ul class="space-y-2 text-sm text-beige">
+      <li><a href="#about" class="hover:text-gold transition">About Us</a></li>
+      <li><a href="#categories" class="hover:text-gold transition">Categories</a></li>
+      <li><a href="#products" class="hover:text-gold transition">Collection</a></li>
+      <li><a href="#consultation" class="hover:text-gold transition">Consultation</a></li>
+     </ul>
+    </div>
+    <div>
+     <h4 data-template-id="footer-support-title" class="canva-text font-semibold mb-4" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 16px;">Support</h4>
+     <ul class="space-y-2 text-sm text-beige">
+      <li>Privacy Policy</li>
+      <li>Terms &amp; Conditions</li>
+      <li>Return Policy</li>
+      <li>Delivery Info</li>
+     </ul>
+    </div>
+    <div>
+     <h4 data-template-id="footer-newsletter-title" class="canva-text font-semibold mb-4" style="color: rgb(245, 241, 234); font-weight: 600; font-style: normal; font-size: 16px;">Newsletter</h4>
+     <form id="newsletter-form" class="flex gap-2"><input type="email" placeholder="Your email" class="flex-1 px-4 py-2 rounded-lg text-sm" required=""> <button type="submit" class="px-4 py-2 bg-gold text-black rounded-lg text-sm font-semibold hover:bg-gold/80 transition">Join</button>
+     </form>
+    </div>
+   </div>
+   <div class="max-w-7xl mx-auto mt-10 pt-6 border-t border-gold/10 text-center">
+    <p data-template-id="footer-copyright" class="canva-text text-xs" style="color: rgb(154, 118, 80); font-weight: 400; font-style: normal; font-size: 16px;">© 2026 Luxe Furnish. All rights reserved. Crafted with passion.</p>
+   </div>
+  </footer><!-- Back to top --> <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gold text-black flex items-center justify-center shadow-lg opacity-0 pointer-events-none transition-opacity z-40" aria-label="Back to top"> <i data-lucide="chevron-up" class="w-5 h-5"></i> </button> <!-- WhatsApp --> <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 left-6 w-14 h-14 rounded-full bg-green-600 flex items-center justify-center shadow-lg z-40 hover:scale-110 transition" aria-label="WhatsApp">
+   <svg viewBox="0 0 24 24" class="w-7 h-7 fill-white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+   </svg></a>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script>
+        // Mobile menu
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        document.querySelectorAll('#mobile-menu a').forEach(a => {
+            a.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden'));
+        });
+
+        // Sticky nav
+        window.addEventListener('scroll', () => {
+            document.getElementById('main-nav').classList.toggle('nav-scrolled', window.scrollY > 50);
+            const btn = document.getElementById('back-to-top');
+            if (window.scrollY > 600) { btn.classList.remove('opacity-0','pointer-events-none'); }
+            else { btn.classList.add('opacity-0','pointer-events-none'); }
+        });
+
+        document.getElementById('back-to-top').addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+        // Product filter
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active','bg-gold/10','text-gold'); b.classList.add('text-beige'); });
+                btn.classList.add('active','bg-gold/10','text-gold'); btn.classList.remove('text-beige');
+                const f = btn.dataset.filter;
+                document.querySelectorAll('.product-card').forEach(card => {
+                    card.style.display = (f === 'all' || card.dataset.category === f) ? '' : 'none';
+                });
+            });
+        });
+
+        // FAQ
+        document.querySelectorAll('.faq-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const answer = btn.nextElementSibling;
+                const icon = btn.querySelector('i');
+                const open = !answer.classList.contains('hidden');
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+                document.querySelectorAll('.faq-toggle i').forEach(i => i.style.transform = '');
+                document.querySelectorAll('.faq-toggle').forEach(b => b.setAttribute('aria-expanded','false'));
+                if (!open) { answer.classList.remove('hidden'); icon.style.transform = 'rotate(180deg)'; btn.setAttribute('aria-expanded','true'); }
+            });
+        });
+
+        // Form
+        document.getElementById('consultation-form').addEventListener('submit', e => {
+            e.preventDefault();
+            document.getElementById('form-success').classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => document.getElementById('form-success').classList.add('hidden'), 4000);
+        });
+        document.getElementById('newsletter-form').addEventListener('submit', e => { e.preventDefault(); e.target.reset(); });
+
+        // Testimonial auto-slide
+        let testIdx = 0;
+        setInterval(() => {
+            const track = document.getElementById('testimonial-track');
+            const cards = track.children.length;
+            testIdx = (testIdx + 1) % cards;
+            const w = track.children[0].offsetWidth;
+            track.style.transform = `translateX(-${testIdx * w}px)`;
+        }, 4000);
+
+        // Fade-in on scroll
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        lucide.createIcons();
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a115aab5b08a6068',t:'MTc4MjQwODI3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body></html>

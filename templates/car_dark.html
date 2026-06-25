@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en"><head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Car Showroom</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+        :root { --vh: 1vh; }
+        body { font-family: 'DM Sans', sans-serif; }
+        .font-display { font-family: 'Playfair Display', serif; }
+        .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+        .glass-hover:hover { background: rgba(255,255,255,0.1); box-shadow: 0 0 30px rgba(59,130,246,0.3); }
+        .nav-solid { background: rgba(15,17,21,0.95); backdrop-filter: blur(10px); }
+        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .car-card:hover img { transform: scale(1.05); }
+        .car-card img { transition: transform 0.4s; }
+        .glow-blue { box-shadow: 0 0 20px rgba(59,130,246,0.4); }
+        .brand-logo:hover { transform: scale(1.1); filter: brightness(1.5); }
+        .brand-logo { transition: all 0.3s; filter: brightness(0.7); }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .float-anim { animation: float 3s ease-in-out infinite; }
+        @keyframes countUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+        .stat-card { animation: countUp 0.6s ease-out forwards; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .accordion-content.open { max-height: 200px; }
+        .testimonial-track { transition: transform 0.5s ease; }
+    </style>
+  <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        charcoal: '#0F1115',
+                        graphite: '#161A20',
+                        slate_dark: '#1D232B',
+                        accent: '#3B82F6',
+                        gold: '#D4AF37'
+                    }
+                }
+            }
+        }
+    </script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root" class="min-h-screen text-gray-200" style="background: rgb(15, 17, 21);"><!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 px-4 py-4">
+   <div class="max-w-7xl mx-auto flex items-center justify-between"><a href="#" data-template-id="nav-logo" class="canva-text text-2xl font-bold text-white" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 24px;">AutoElite</a>
+    <div class="hidden md:flex items-center gap-8"><a href="#about" class="text-gray-300 hover:text-white transition">About</a> <a href="#cars" class="text-gray-300 hover:text-white transition">Cars</a> <a href="#brands" class="text-gray-300 hover:text-white transition">Brands</a> <a href="#booking" class="text-gray-300 hover:text-white transition">Book Test Drive</a> <a href="#contact" class="text-gray-300 hover:text-white transition">Contact</a>
+    </div><button id="mobile-menu-btn" class="md:hidden text-white"><i data-lucide="menu" class="w-6 h-6"></i></button>
+   </div>
+   <div id="mobile-menu" class="hidden md:hidden mt-4 glass rounded-xl p-4 space-y-3"><a href="#about" class="block text-gray-300 hover:text-white">About</a> <a href="#cars" class="block text-gray-300 hover:text-white">Cars</a> <a href="#brands" class="block text-gray-300 hover:text-white">Brands</a> <a href="#booking" class="block text-gray-300 hover:text-white">Book Test Drive</a> <a href="#contact" class="block text-gray-300 hover:text-white">Contact</a>
+   </div>
+  </nav><!-- Hero -->
+  <header class="relative w-full" style="min-height: calc(100 * min(var(--vh, 1vh), 1vh));"><img data-template-id="hero-bg" class="canva-image absolute inset-0 w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/18108314/pexels-photo-18108314.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920" alt="Sleek luxury cars showcased in a stylish, modern automotive dealership">
+   <div class="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/60 to-charcoal"></div>
+   <div class="relative z-10 flex flex-col items-center justify-center text-center px-4" style="min-height: calc(100 * min(var(--vh, 1vh), 1vh));">
+    <h1 data-template-id="hero-title" class="canva-text font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 float-anim" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 32px;">Drive Your Dream Car Today</h1>
+    <p data-template-id="hero-subtitle" class="canva-text text-lg md:text-xl text-gray-300 max-w-3xl mb-8" style="color: rgb(209, 213, 219); font-weight: 400; font-style: normal; font-size: 16px;">Explore the latest models from the world's most trusted automotive brands under one roof.</p>
+    <div class="flex flex-wrap gap-4 justify-center"><a href="#cars" data-template-id="hero-cta1" class="canva-button px-8 py-3 rounded-full font-semibold text-white bg-accent hover:bg-blue-600 transition glow-blue" style="background: rgb(59, 130, 246); color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Explore Collection</a> <a href="#booking" data-template-id="hero-cta2" class="canva-button px-8 py-3 rounded-full font-semibold text-white border border-white/30 hover:bg-white/10 transition" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Book Test Drive</a>
+    </div>
+    <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+     <div class="stat-card">
+      <p class="text-3xl font-bold text-accent">10,000+</p>
+      <p class="text-sm text-gray-400">Happy Customers</p>
+     </div>
+     <div class="stat-card" style="animation-delay:0.1s">
+      <p class="text-3xl font-bold text-accent">500+</p>
+      <p class="text-sm text-gray-400">Cars Available</p>
+     </div>
+     <div class="stat-card" style="animation-delay:0.2s">
+      <p class="text-3xl font-bold text-accent">15+</p>
+      <p class="text-sm text-gray-400">Partner Brands</p>
+     </div>
+     <div class="stat-card" style="animation-delay:0.3s">
+      <p class="text-3xl font-bold text-accent">20+</p>
+      <p class="text-sm text-gray-400">Years Experience</p>
+     </div>
+    </div>
+   </div>
+  </header><!-- About -->
+  <section id="about" class="py-20 px-4">
+   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center fade-up">
+    <div>
+     <h2 data-template-id="about-title" class="canva-text font-display text-3xl md:text-4xl font-bold text-white mb-6" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 24px;">About Our Showroom</h2>
+     <p data-template-id="about-desc" class="canva-text text-gray-400 leading-relaxed mb-6" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">With over 20 years of excellence, we are a premier multi-brand automobile dealership offering vehicles from 15+ leading brands. Our commitment to quality, transparent pricing, and exceptional customer service has made us the trusted choice for over 10,000 happy customers. From financing assistance to after-sales support, we provide a complete automotive experience.</p>
+     <div class="grid grid-cols-2 gap-4">
+      <div class="glass rounded-xl p-4 text-center">
+       <p class="text-2xl font-bold text-gold">15+</p>
+       <p class="text-xs text-gray-400">Brands</p>
+      </div>
+      <div class="glass rounded-xl p-4 text-center">
+       <p class="text-2xl font-bold text-gold">20+</p>
+       <p class="text-xs text-gray-400">Years</p>
+      </div>
+     </div>
+    </div>
+    <div class="rounded-2xl overflow-hidden"><img data-template-id="about-img" class="canva-image w-full h-80 object-cover rounded-2xl" loading="lazy" src="https://images.pexels.com/photos/16176576/pexels-photo-16176576.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Sleek cars showcased in a contemporary indoor dealership space">
+    </div>
+   </div>
+  </section><!-- Why Choose Us -->
+  <section class="py-20 px-4 bg-graphite">
+   <div class="max-w-7xl mx-auto text-center fade-up">
+    <h2 data-template-id="why-title" class="canva-text font-display text-3xl md:text-4xl font-bold text-white mb-12" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 24px;">Why Choose Us</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+     <div data-template-id="why-card-1" class="canva-card glass glass-hover rounded-xl p-6 text-center transition-all" style="background: rgba(255, 255, 255, 0.05);">
+      <div class="text-accent text-3xl mb-3">
+       ✓
+      </div>
+      <h3 data-template-id="why-card-1-title" class="canva-text font-semibold text-white mb-2" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 19px;">Certified Vehicles</h3>
+      <p data-template-id="why-card-1-desc" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Every car undergoes rigorous quality checks</p>
+     </div>
+     <div data-template-id="why-card-2" class="canva-card glass glass-hover rounded-xl p-6 text-center transition-all" style="background: rgba(255, 255, 255, 0.05);">
+      <div class="text-accent text-3xl mb-3">
+       ✓
+      </div>
+      <h3 data-template-id="why-card-2-title" class="canva-text font-semibold text-white mb-2" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 19px;">Competitive Pricing</h3>
+      <p data-template-id="why-card-2-desc" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Best-in-class prices with transparent deals</p>
+     </div>
+     <div data-template-id="why-card-3" class="canva-card glass glass-hover rounded-xl p-6 text-center transition-all" style="background: rgba(255, 255, 255, 0.05);">
+      <div class="text-accent text-3xl mb-3">
+       ✓
+      </div>
+      <h3 data-template-id="why-card-3-title" class="canva-text font-semibold text-white mb-2" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 19px;">Flexible Financing</h3>
+      <p data-template-id="why-card-3-desc" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Easy EMI plans with multiple bank partners</p>
+     </div>
+     <div data-template-id="why-card-4" class="canva-card glass glass-hover rounded-xl p-6 text-center transition-all" style="background: rgba(255, 255, 255, 0.05);">
+      <div class="text-accent text-3xl mb-3">
+       ✓
+      </div>
+      <h3 data-template-id="why-card-4-title" class="canva-text font-semibold text-white mb-2" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 19px;">Multi-Brand Selection</h3>
+      <p data-template-id="why-card-4-desc" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">15+ brands available under one roof</p>
+     </div>
+     <div data-template-id="why-card-5" class="canva-card glass glass-hover rounded-xl p-6 text-center transition-all" style="background: rgba(255, 255, 255, 0.05);">
+      <div class="text-accent text-3xl mb-3">
+       ✓
+      </div>
+      <h3 data-template-id="why-card-5-title" class="canva-text font-semibold text-white mb-2" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 19px;">Fast Documentation</h3>
+      <p data-template-id="why-card-5-desc" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Quick and hassle-free paperwork process</p>
+     </div>
+     <div data-template-id="why-card-6" class="canva-card glass glass-hover rounded-xl p-6 text-center transition-all" style="background: rgba(255, 255, 255, 0.05);">
+      <div class="text-accent text-3xl mb-3">
+       ✓
+      </div>
+      <h3 data-template-id="why-card-6-title" class="canva-text font-semibold text-white mb-2" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 19px;">Insurance Assistance</h3>
+      <p data-template-id="why-card-6-desc" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Complete insurance support and guidance</p>
+     </div>
+     <div data-template-id="why-card-7" class="canva-card glass glass-hover rounded-xl p-6 text-center transition-all" style="background: rgba(255, 255, 255, 0.05);">
+      <div class="text-accent text-3xl mb-3">
+       ✓
+      </div>
+      <h3 data-template-id="why-card-7-title" class="canva-text font-semibold text-white mb-2" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 19px;">Expert Consultation</h3>
+      <p data-template-id="why-card-7-desc" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Professional advisors to guide your choice</p>
+     </div>
+     <div data-template-id="why-card-8" class="canva-card glass glass-hover rounded-xl p-6 text-center transition-all" style="background: rgba(255, 255, 255, 0.05);">
+      <div class="text-accent text-3xl mb-3">
+       ✓
+      </div>
+      <h3 data-template-id="why-card-8-title" class="canva-text font-semibold text-white mb-2" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 19px;">Test Drive Booking</h3>
+      <p data-template-id="why-card-8-desc" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Schedule a premium test drive experience</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- Brands -->
+  <section id="brands" class="py-20 px-4">
+   <div class="max-w-7xl mx-auto text-center fade-up">
+    <h2 data-template-id="brands-title" class="canva-text font-display text-3xl md:text-4xl font-bold text-white mb-12" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 24px;">Our Brand Partners</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+     <div class="brand-logo glass rounded-xl p-6 flex items-center justify-center cursor-pointer">
+      <span class="text-lg font-semibold text-gray-300">Maruti Suzuki</span>
+     </div>
+     <div class="brand-logo glass rounded-xl p-6 flex items-center justify-center cursor-pointer">
+      <span class="text-lg font-semibold text-gray-300">Hyundai</span>
+     </div>
+     <div class="brand-logo glass rounded-xl p-6 flex items-center justify-center cursor-pointer">
+      <span class="text-lg font-semibold text-gray-300">Honda</span>
+     </div>
+     <div class="brand-logo glass rounded-xl p-6 flex items-center justify-center cursor-pointer">
+      <span class="text-lg font-semibold text-gray-300">Tata Motors</span>
+     </div>
+     <div class="brand-logo glass rounded-xl p-6 flex items-center justify-center cursor-pointer">
+      <span class="text-lg font-semibold text-gray-300">Mahindra</span>
+     </div>
+     <div class="brand-logo glass rounded-xl p-6 flex items-center justify-center cursor-pointer">
+      <span class="text-lg font-semibold text-gray-300">Toyota</span>
+     </div>
+     <div class="brand-logo glass rounded-xl p-6 flex items-center justify-center cursor-pointer">
+      <span class="text-lg font-semibold text-gray-300">Kia</span>
+     </div>
+     <div class="brand-logo glass rounded-xl p-6 flex items-center justify-center cursor-pointer">
+      <span class="text-lg font-semibold text-gray-300">MG Motor</span>
+     </div>
+     <div class="brand-logo glass rounded-xl p-6 flex items-center justify-center cursor-pointer">
+      <span class="text-lg font-semibold text-gray-300">Nissan</span>
+     </div>
+     <div class="brand-logo glass rounded-xl p-6 flex items-center justify-center cursor-pointer">
+      <span class="text-lg font-semibold text-gray-300">Volkswagen</span>
+     </div>
+    </div>
+   </div>
+  </section><!-- Car Finder -->
+  <section id="cars" class="py-20 px-4 bg-graphite">
+   <div class="max-w-7xl mx-auto fade-up">
+    <h2 data-template-id="cars-title" class="canva-text font-display text-3xl md:text-4xl font-bold text-white mb-4 text-center" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 24px;">Featured Collection</h2>
+    <p data-template-id="cars-subtitle" class="canva-text text-gray-400 text-center mb-10" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Discover your perfect vehicle from our curated selection of premium automobiles</p><!-- Filters -->
+    <div class="glass rounded-xl p-6 mb-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+     <div><label for="filter-budget" class="text-sm text-gray-400 mb-1 block">Budget</label> <select id="filter-budget" class="w-full bg-slate_dark text-gray-200 rounded-lg px-3 py-2 border border-white/10"> <option value="">All Budgets</option> <option value="5">Under ₹5L</option> <option value="10">₹5L – ₹10L</option> <option value="15">₹10L – ₹15L</option> <option value="25">₹15L – ₹25L</option> <option value="99">Above ₹25L</option> </select>
+     </div>
+     <div><label for="filter-brand" class="text-sm text-gray-400 mb-1 block">Brand</label> <select id="filter-brand" class="w-full bg-slate_dark text-gray-200 rounded-lg px-3 py-2 border border-white/10"> <option value="">All Brands</option> <option>Hyundai</option><option>Honda</option><option>Maruti Suzuki</option><option>Kia</option><option>Toyota</option><option>Mahindra</option> </select>
+     </div>
+     <div><label for="filter-fuel" class="text-sm text-gray-400 mb-1 block">Fuel Type</label> <select id="filter-fuel" class="w-full bg-slate_dark text-gray-200 rounded-lg px-3 py-2 border border-white/10"> <option value="">All</option><option>Petrol</option><option>Diesel</option><option>Hybrid</option> </select>
+     </div>
+     <div><label for="filter-type" class="text-sm text-gray-400 mb-1 block">Body Type</label> <select id="filter-type" class="w-full bg-slate_dark text-gray-200 rounded-lg px-3 py-2 border border-white/10"> <option value="">All</option><option>SUV</option><option>Sedan</option><option>MPV</option> </select>
+     </div>
+    </div><!-- Car Grid -->
+    <div id="car-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Car 1 -->
+     <div class="car-card glass rounded-2xl overflow-hidden transition-all hover:shadow-xl hover:shadow-accent/10" data-brand="Hyundai" data-fuel="Petrol" data-type="SUV" data-min="11" data-max="20">
+      <div class="overflow-hidden h-48">
+       <img data-template-id="car1-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/12163946/pexels-photo-12163946.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Studio shot of a Hyundai SUV showcasing sleek design">
+      </div>
+      <div class="p-5">
+       <p class="text-accent text-sm font-medium">Hyundai</p>
+       <h3 data-template-id="car1-name" class="canva-text text-xl font-bold text-white mt-1" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 19px;">Hyundai Creta</h3>
+       <div class="flex gap-3 mt-3 text-xs text-gray-400"><span>SUV</span><span>•</span><span>Petrol/Diesel</span><span>•</span><span>5 Seater</span>
+       </div>
+       <p data-template-id="car1-price" class="canva-text text-gold font-semibold mt-3" style="color: rgb(212, 175, 55); font-weight: 600; font-style: normal; font-size: 16px;">₹11L – ₹20L</p>
+       <div class="flex gap-3 mt-4"><a href="#booking" class="flex-1 text-center py-2 bg-accent text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition">Book Test Drive</a>
+       </div>
+      </div>
+     </div><!-- Car 2 -->
+     <div class="car-card glass rounded-2xl overflow-hidden transition-all hover:shadow-xl hover:shadow-accent/10" data-brand="Honda" data-fuel="Petrol" data-type="Sedan" data-min="12" data-max="18">
+      <div class="overflow-hidden h-48">
+       <img data-template-id="car2-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/15394300/pexels-photo-15394300.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A sleek silver car illuminated by neon lights on a city street at night">
+      </div>
+      <div class="p-5">
+       <p class="text-accent text-sm font-medium">Honda</p>
+       <h3 data-template-id="car2-name" class="canva-text text-xl font-bold text-white mt-1" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 19px;">Honda City</h3>
+       <div class="flex gap-3 mt-3 text-xs text-gray-400"><span>Sedan</span><span>•</span><span>Petrol</span><span>•</span><span>5 Seater</span>
+       </div>
+       <p data-template-id="car2-price" class="canva-text text-gold font-semibold mt-3" style="color: rgb(212, 175, 55); font-weight: 600; font-style: normal; font-size: 16px;">₹12L – ₹18L</p>
+       <div class="flex gap-3 mt-4"><a href="#booking" class="flex-1 text-center py-2 bg-accent text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition">Book Test Drive</a>
+       </div>
+      </div>
+     </div><!-- Car 3 -->
+     <div class="car-card glass rounded-2xl overflow-hidden transition-all hover:shadow-xl hover:shadow-accent/10" data-brand="Maruti Suzuki" data-fuel="Petrol" data-type="SUV" data-min="9" data-max="15">
+      <div class="overflow-hidden h-48">
+       <img data-template-id="car3-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/19655540/pexels-photo-19655540.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Front view of a Suzuki SUV highlighting its grill and headlights">
+      </div>
+      <div class="p-5">
+       <p class="text-accent text-sm font-medium">Maruti Suzuki</p>
+       <h3 data-template-id="car3-name" class="canva-text text-xl font-bold text-white mt-1" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 19px;">Maruti Suzuki Brezza</h3>
+       <div class="flex gap-3 mt-3 text-xs text-gray-400"><span>SUV</span><span>•</span><span>Petrol/CNG</span><span>•</span><span>5 Seater</span>
+       </div>
+       <p data-template-id="car3-price" class="canva-text text-gold font-semibold mt-3" style="color: rgb(212, 175, 55); font-weight: 600; font-style: normal; font-size: 16px;">₹9L – ₹15L</p>
+       <div class="flex gap-3 mt-4"><a href="#booking" class="flex-1 text-center py-2 bg-accent text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition">Book Test Drive</a>
+       </div>
+      </div>
+     </div><!-- Car 4 -->
+     <div class="car-card glass rounded-2xl overflow-hidden transition-all hover:shadow-xl hover:shadow-accent/10" data-brand="Kia" data-fuel="Petrol" data-type="SUV" data-min="11" data-max="21">
+      <div class="overflow-hidden h-48">
+       <img data-template-id="car4-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/26743954/pexels-photo-26743954.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Night view of a Kia SUV parked against a lit city skyline">
+      </div>
+      <div class="p-5">
+       <p class="text-accent text-sm font-medium">Kia</p>
+       <h3 data-template-id="car4-name" class="canva-text text-xl font-bold text-white mt-1" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 19px;">Kia Seltos</h3>
+       <div class="flex gap-3 mt-3 text-xs text-gray-400"><span>SUV</span><span>•</span><span>Petrol/Diesel</span><span>•</span><span>5 Seater</span>
+       </div>
+       <p data-template-id="car4-price" class="canva-text text-gold font-semibold mt-3" style="color: rgb(212, 175, 55); font-weight: 600; font-style: normal; font-size: 16px;">₹11L – ₹21L</p>
+       <div class="flex gap-3 mt-4"><a href="#booking" class="flex-1 text-center py-2 bg-accent text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition">Book Test Drive</a>
+       </div>
+      </div>
+     </div><!-- Car 5 -->
+     <div class="car-card glass rounded-2xl overflow-hidden transition-all hover:shadow-xl hover:shadow-accent/10" data-brand="Toyota" data-fuel="Hybrid" data-type="MPV" data-min="19" data-max="31">
+      <div class="overflow-hidden h-48">
+       <img data-template-id="car5-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/30287502/pexels-photo-30287502.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Detailed shot of a Toyota car grille showcasing brand emblem">
+      </div>
+      <div class="p-5">
+       <p class="text-accent text-sm font-medium">Toyota</p>
+       <h3 data-template-id="car5-name" class="canva-text text-xl font-bold text-white mt-1" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 19px;">Toyota Innova Hycross</h3>
+       <div class="flex gap-3 mt-3 text-xs text-gray-400"><span>MPV</span><span>•</span><span>Hybrid</span><span>•</span><span>7 Seater</span>
+       </div>
+       <p data-template-id="car5-price" class="canva-text text-gold font-semibold mt-3" style="color: rgb(212, 175, 55); font-weight: 600; font-style: normal; font-size: 16px;">₹19L – ₹31L</p>
+       <div class="flex gap-3 mt-4"><a href="#booking" class="flex-1 text-center py-2 bg-accent text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition">Book Test Drive</a>
+       </div>
+      </div>
+     </div><!-- Car 6 -->
+     <div class="car-card glass rounded-2xl overflow-hidden transition-all hover:shadow-xl hover:shadow-accent/10" data-brand="Mahindra" data-fuel="Diesel" data-type="SUV" data-min="14" data-max="30">
+      <div class="overflow-hidden h-48">
+       <img data-template-id="car6-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/29192146/pexels-photo-29192146.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A stylish SUV parked in open terrain under a dramatic night sky">
+      </div>
+      <div class="p-5">
+       <p class="text-accent text-sm font-medium">Mahindra</p>
+       <h3 data-template-id="car6-name" class="canva-text text-xl font-bold text-white mt-1" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 19px;">Mahindra XUV700</h3>
+       <div class="flex gap-3 mt-3 text-xs text-gray-400"><span>SUV</span><span>•</span><span>Petrol/Diesel</span><span>•</span><span>7 Seater</span>
+       </div>
+       <p data-template-id="car6-price" class="canva-text text-gold font-semibold mt-3" style="color: rgb(212, 175, 55); font-weight: 600; font-style: normal; font-size: 16px;">₹14L – ₹30L</p>
+       <div class="flex gap-3 mt-4"><a href="#booking" class="flex-1 text-center py-2 bg-accent text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition">Book Test Drive</a>
+       </div>
+      </div>
+     </div>
+    </div>
+    <p id="no-results" class="hidden text-center text-gray-400 mt-8 text-lg">No vehicles match your filters. Try adjusting your criteria.</p>
+   </div>
+  </section><!-- Test Drive Booking -->
+  <section id="booking" class="py-20 px-4">
+   <div class="max-w-3xl mx-auto fade-up">
+    <h2 data-template-id="booking-title" class="canva-text font-display text-3xl md:text-4xl font-bold text-white mb-4 text-center" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 24px;">Schedule Your Premium Test Drive</h2>
+    <p data-template-id="booking-subtitle" class="canva-text text-gray-400 text-center mb-10" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Experience the thrill of driving your dream car. Book a test drive at your convenience.</p>
+    <form id="booking-form" class="glass rounded-2xl p-8 space-y-5">
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div><label for="b-name" class="text-sm text-gray-400 block mb-1">Full Name</label> <input id="b-name" type="text" required="" class="w-full bg-slate_dark text-white rounded-lg px-4 py-3 border border-white/10 focus:border-accent focus:outline-none">
+      </div>
+      <div><label for="b-phone" class="text-sm text-gray-400 block mb-1">Mobile Number</label> <input id="b-phone" type="tel" required="" class="w-full bg-slate_dark text-white rounded-lg px-4 py-3 border border-white/10 focus:border-accent focus:outline-none">
+      </div>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div><label for="b-email" class="text-sm text-gray-400 block mb-1">Email Address</label> <input id="b-email" type="email" required="" class="w-full bg-slate_dark text-white rounded-lg px-4 py-3 border border-white/10 focus:border-accent focus:outline-none">
+      </div>
+      <div><label for="b-vehicle" class="text-sm text-gray-400 block mb-1">Vehicle</label> <select id="b-vehicle" required="" class="w-full bg-slate_dark text-white rounded-lg px-4 py-3 border border-white/10 focus:border-accent focus:outline-none"> <option value="">Select Vehicle</option> <option>Hyundai Creta</option><option>Honda City</option><option>Maruti Brezza</option><option>Kia Seltos</option><option>Toyota Innova Hycross</option><option>Mahindra XUV700</option> </select>
+      </div>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div><label for="b-date" class="text-sm text-gray-400 block mb-1">Preferred Date</label> <input id="b-date" type="date" required="" class="w-full bg-slate_dark text-white rounded-lg px-4 py-3 border border-white/10 focus:border-accent focus:outline-none">
+      </div>
+      <div><label for="b-time" class="text-sm text-gray-400 block mb-1">Preferred Time</label> <select id="b-time" required="" class="w-full bg-slate_dark text-white rounded-lg px-4 py-3 border border-white/10 focus:border-accent focus:outline-none"> <option value="">Select Time</option> <option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option> </select>
+      </div>
+     </div>
+     <div><label for="b-msg" class="text-sm text-gray-400 block mb-1">Message (Optional)</label> <textarea id="b-msg" rows="3" class="w-full bg-slate_dark text-white rounded-lg px-4 py-3 border border-white/10 focus:border-accent focus:outline-none resize-none"></textarea>
+     </div><button type="submit" data-template-id="booking-btn" class="canva-button w-full py-4 bg-accent text-white rounded-xl font-semibold text-lg hover:bg-blue-600 transition glow-blue" style="background: rgb(59, 130, 246); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 18px;">Book My Test Drive</button>
+    </form>
+    <div id="booking-success" class="hidden glass rounded-2xl p-10 text-center">
+     <div class="text-5xl mb-4">
+      🎉
+     </div>
+     <h3 class="text-2xl font-bold text-white mb-2">Booking Confirmed!</h3>
+     <p class="text-gray-400">We'll contact you shortly to confirm your test drive appointment.</p>
+    </div>
+   </div>
+  </section><!-- Testimonials -->
+  <section class="py-20 px-4 bg-graphite overflow-hidden">
+   <div class="max-w-7xl mx-auto fade-up">
+    <h2 data-template-id="reviews-title" class="canva-text font-display text-3xl md:text-4xl font-bold text-white mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 24px;">What Our Customers Say</h2>
+    <div class="relative overflow-hidden">
+     <div id="testimonial-track" class="testimonial-track flex gap-6"><!-- Review 1 -->
+      <div class="glass rounded-2xl p-6 min-w-[300px] md:min-w-[400px] flex-shrink-0">
+       <div class="flex items-center gap-3 mb-4"><img data-template-id="review1-img" class="canva-image w-12 h-12 rounded-full object-cover" loading="lazy" src="https://images.pexels.com/photos/7580994/pexels-photo-7580994.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Portrait of a confident man smiling">
+        <div>
+         <p data-template-id="review1-name" class="canva-text font-semibold text-white" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Rajesh Kumar</p>
+         <p class="text-yellow-400 text-sm">★★★★★</p>
+        </div>
+       </div>
+       <p data-template-id="review1-text" class="canva-text text-gray-300 text-sm leading-relaxed" style="color: rgb(209, 213, 219); font-weight: 400; font-style: normal; font-size: 16px;">Exceptional experience from start to finish. The staff was knowledgeable and the selection of cars was impressive. Found my perfect Hyundai Creta within my budget.</p>
+      </div><!-- Review 2 -->
+      <div class="glass rounded-2xl p-6 min-w-[300px] md:min-w-[400px] flex-shrink-0">
+       <div class="flex items-center gap-3 mb-4"><img data-template-id="review2-img" class="canva-image w-12 h-12 rounded-full object-cover" loading="lazy" src="https://images.pexels.com/photos/7580837/pexels-photo-7580837.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Confident woman expressing leadership and professionalism">
+        <div>
+         <p data-template-id="review2-name" class="canva-text font-semibold text-white" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Priya Sharma</p>
+         <p class="text-yellow-400 text-sm">★★★★★</p>
+        </div>
+       </div>
+       <p data-template-id="review2-text" class="canva-text text-gray-300 text-sm leading-relaxed" style="color: rgb(209, 213, 219); font-weight: 400; font-style: normal; font-size: 16px;">The financing process was smooth, and I found the perfect SUV within my budget. The team went above and beyond to ensure I got the best deal possible.</p>
+      </div><!-- Review 3 -->
+      <div class="glass rounded-2xl p-6 min-w-[300px] md:min-w-[400px] flex-shrink-0">
+       <div class="flex items-center gap-3 mb-4"><img data-template-id="review3-img" class="canva-image w-12 h-12 rounded-full object-cover" loading="lazy" src="https://images.pexels.com/photos/7580997/pexels-photo-7580997.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Professional businessman smiling in office environment">
+        <div>
+         <p data-template-id="review3-name" class="canva-text font-semibold text-white" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Amit Patel</p>
+         <p class="text-yellow-400 text-sm">★★★★★</p>
+        </div>
+       </div>
+       <p data-template-id="review3-text" class="canva-text text-gray-300 text-sm leading-relaxed" style="color: rgb(209, 213, 219); font-weight: 400; font-style: normal; font-size: 16px;">Highly professional team with excellent after-sales support. The documentation was completed in record time and the vehicle exchange offer was very fair.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Financing -->
+  <section class="py-20 px-4">
+   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center fade-up">
+    <div>
+     <h2 data-template-id="finance-title" class="canva-text font-display text-3xl md:text-4xl font-bold text-white mb-6" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 24px;">Financing &amp; Insurance Solutions</h2>
+     <p data-template-id="finance-desc" class="canva-text text-gray-400 leading-relaxed mb-6" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">We make car ownership accessible with flexible financing options through our network of banking partners. From low EMI plans to instant loan approvals, our dedicated finance team ensures a smooth and transparent process.</p>
+     <div class="space-y-3">
+      <div class="flex items-center gap-3">
+       <span class="text-accent">✓</span><span class="text-gray-300">Low EMI Plans</span>
+      </div>
+      <div class="flex items-center gap-3">
+       <span class="text-accent">✓</span><span class="text-gray-300">Instant Loan Assistance</span>
+      </div>
+      <div class="flex items-center gap-3">
+       <span class="text-accent">✓</span><span class="text-gray-300">Multiple Bank Partnerships</span>
+      </div>
+      <div class="flex items-center gap-3">
+       <span class="text-accent">✓</span><span class="text-gray-300">Insurance Support</span>
+      </div>
+      <div class="flex items-center gap-3">
+       <span class="text-accent">✓</span><span class="text-gray-300">Vehicle Exchange Programs</span>
+      </div>
+     </div>
+    </div>
+    <div class="rounded-2xl overflow-hidden"><img data-template-id="finance-img" class="canva-image w-full h-80 object-cover rounded-2xl" loading="lazy" src="https://images.pexels.com/photos/7144212/pexels-photo-7144212.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Close-up of a business handshake as car keys are handed over">
+    </div>
+   </div>
+  </section><!-- Contact -->
+  <section id="contact" class="py-20 px-4 bg-graphite">
+   <div class="max-w-7xl mx-auto fade-up">
+    <h2 data-template-id="contact-title" class="canva-text font-display text-3xl md:text-4xl font-bold text-white mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 24px;">Get In Touch</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+     <div class="glass rounded-2xl p-8 space-y-6">
+      <div class="flex items-start gap-4"><i data-lucide="map-pin" class="w-6 h-6 text-accent flex-shrink-0 mt-1"></i>
+       <div>
+        <p class="text-white font-medium">Visit Our Showroom</p>
+        <p data-template-id="contact-address" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">NH-16, Patia Square, Bhubaneswar, Odisha 751024</p>
+       </div>
+      </div>
+      <div class="flex items-start gap-4"><i data-lucide="phone" class="w-6 h-6 text-accent flex-shrink-0 mt-1"></i>
+       <div>
+        <p class="text-white font-medium">Call Us</p>
+        <p data-template-id="contact-phone" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">+91 98765 43210</p>
+       </div>
+      </div>
+      <div class="flex items-start gap-4"><i data-lucide="mail" class="w-6 h-6 text-accent flex-shrink-0 mt-1"></i>
+       <div>
+        <p class="text-white font-medium">Email</p>
+        <p data-template-id="contact-email" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">contact@autoelite.in</p>
+       </div>
+      </div>
+      <div class="flex items-start gap-4"><i data-lucide="clock" class="w-6 h-6 text-accent flex-shrink-0 mt-1"></i>
+       <div>
+        <p class="text-white font-medium">Working Hours</p>
+        <p data-template-id="contact-hours" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Monday – Saturday: 9:00 AM – 8:00 PM</p>
+       </div>
+      </div>
+     </div>
+     <div class="glass rounded-2xl overflow-hidden"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.098!2d85.8245!3d20.2961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDE3JzQ2LjAiTiA4NcKwNDknMjguMiJF!5e0!3m2!1sen!2sin!4v1600000000000" width="100%" height="100%" style="border:0;min-height:300px;" allowfullscreen="" loading="lazy"></iframe>
+     </div>
+    </div>
+   </div>
+  </section><!-- FAQ -->
+  <section class="py-20 px-4">
+   <div class="max-w-3xl mx-auto fade-up">
+    <h2 data-template-id="faq-title" class="canva-text font-display text-3xl md:text-4xl font-bold text-white mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 24px;">Frequently Asked Questions</h2>
+    <div class="space-y-4" id="faq-container">
+     <div class="glass rounded-xl overflow-hidden"><button class="faq-btn w-full text-left px-6 py-4 flex items-center justify-between text-white font-medium"><span>Do you provide financing options?</span><i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i></button>
+      <div class="accordion-content px-6 text-gray-400 text-sm">
+       <p class="pb-4">Yes, we offer flexible financing through multiple banking partners with competitive interest rates and easy EMI options tailored to your budget.</p>
+      </div>
+     </div>
+     <div class="glass rounded-xl overflow-hidden"><button class="faq-btn w-full text-left px-6 py-4 flex items-center justify-between text-white font-medium"><span>Can I book a test drive online?</span><i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i></button>
+      <div class="accordion-content px-6 text-gray-400 text-sm">
+       <p class="pb-4">Absolutely! Use our online booking form to schedule a test drive at your preferred date and time. Our team will confirm your appointment promptly.</p>
+      </div>
+     </div>
+     <div class="glass rounded-xl overflow-hidden"><button class="faq-btn w-full text-left px-6 py-4 flex items-center justify-between text-white font-medium"><span>Are all vehicles certified?</span><i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i></button>
+      <div class="accordion-content px-6 text-gray-400 text-sm">
+       <p class="pb-4">Every vehicle in our showroom undergoes rigorous quality checks and comes with complete certification and warranty documentation.</p>
+      </div>
+     </div>
+     <div class="glass rounded-xl overflow-hidden"><button class="faq-btn w-full text-left px-6 py-4 flex items-center justify-between text-white font-medium"><span>Do you offer exchange services?</span><i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i></button>
+      <div class="accordion-content px-6 text-gray-400 text-sm">
+       <p class="pb-4">Yes, we provide hassle-free vehicle exchange programs with fair market valuations for your existing car.</p>
+      </div>
+     </div>
+     <div class="glass rounded-xl overflow-hidden"><button class="faq-btn w-full text-left px-6 py-4 flex items-center justify-between text-white font-medium"><span>What documents are required for financing?</span><i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i></button>
+      <div class="accordion-content px-6 text-gray-400 text-sm">
+       <p class="pb-4">You'll need identity proof, address proof, income documents (salary slips or ITR), and bank statements. Our team assists with the entire documentation process.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Footer -->
+  <footer data-template-id="footer-section" class="canva-footer py-16 px-4 border-t border-white/10" style="background: rgb(10, 12, 15);">
+   <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+    <div>
+     <h3 data-template-id="footer-brand" class="canva-text text-xl font-bold text-white mb-4" style="color: rgb(255, 255, 255); font-weight: bold; font-style: normal; font-size: 19px;">AutoElite</h3>
+     <p data-template-id="footer-desc" class="canva-text text-gray-400 text-sm leading-relaxed" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Your premier multi-brand automobile destination. Offering the finest vehicles from 15+ leading brands with exceptional service and competitive pricing.</p>
+    </div>
+    <div>
+     <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+     <ul class="space-y-2 text-sm text-gray-400">
+      <li><a href="#about" class="hover:text-white transition">About Us</a></li>
+      <li><a href="#cars" class="hover:text-white transition">Our Collection</a></li>
+      <li><a href="#booking" class="hover:text-white transition">Book Test Drive</a></li>
+      <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+     </ul>
+    </div>
+    <div>
+     <h4 class="text-white font-semibold mb-4">Brands</h4>
+     <ul class="space-y-2 text-sm text-gray-400">
+      <li>Maruti Suzuki</li>
+      <li>Hyundai</li>
+      <li>Honda</li>
+      <li>Tata Motors</li>
+      <li>Toyota</li>
+     </ul>
+    </div>
+    <div>
+     <h4 class="text-white font-semibold mb-4">Newsletter</h4>
+     <p class="text-gray-400 text-sm mb-3">Get latest offers and updates.</p>
+     <form id="newsletter-form" class="flex gap-2"><input type="email" placeholder="Your email" required="" class="flex-1 bg-slate_dark text-white rounded-lg px-3 py-2 text-sm border border-white/10 focus:border-accent focus:outline-none"> <button type="submit" class="bg-accent text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition">Subscribe</button>
+     </form>
+    </div>
+   </div>
+   <div class="max-w-7xl mx-auto mt-10 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+    <p data-template-id="footer-copy" class="canva-text" style="color: rgb(107, 114, 128); font-weight: 400; font-style: normal; font-size: 16px;">© 2026 AutoElite. All rights reserved.</p>
+    <div class="flex gap-4 mt-3 md:mt-0"><a href="#" class="hover:text-white transition">Privacy Policy</a> <a href="#" class="hover:text-white transition">Terms &amp; Conditions</a>
+    </div>
+   </div>
+  </footer><!-- Floating Buttons -->
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3"><button id="back-to-top" class="hidden w-12 h-12 bg-accent text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-600 transition" aria-label="Back to top"><i data-lucide="chevron-up" class="w-5 h-5"></i></button> <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" class="w-12 h-12 bg-green-500 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 transition" aria-label="WhatsApp"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+  </div>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script>
+        lucide.createIcons();
+
+        // Navbar scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('nav-solid', window.scrollY > 50);
+            document.getElementById('back-to-top').classList.toggle('hidden', window.scrollY < 400);
+        });
+
+        // Mobile menu
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Back to top
+        document.getElementById('back-to-top').addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+        // Scroll reveal
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+        }, {threshold:0.1});
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Car filters
+        const filters = ['filter-budget','filter-brand','filter-fuel','filter-type'];
+        filters.forEach(id => document.getElementById(id).addEventListener('change', filterCars));
+
+        function filterCars() {
+            const budget = document.getElementById('filter-budget').value;
+            const brand = document.getElementById('filter-brand').value;
+            const fuel = document.getElementById('filter-fuel').value;
+            const type = document.getElementById('filter-type').value;
+            const cards = document.querySelectorAll('.car-card');
+            let visible = 0;
+
+            cards.forEach(card => {
+                let show = true;
+                if (brand && card.dataset.brand !== brand) show = false;
+                if (fuel && !card.dataset.fuel.includes(fuel)) show = false;
+                if (type && card.dataset.type !== type) show = false;
+                if (budget) {
+                    const b = parseInt(budget);
+                    const min = parseInt(card.dataset.min);
+                    const max = parseInt(card.dataset.max);
+                    if (b === 5 && min >= 5) show = false;
+                    else if (b === 10 && (min >= 10 || max < 5)) show = false;
+                    else if (b === 15 && (min >= 15 || max < 10)) show = false;
+                    else if (b === 25 && (min >= 25 || max < 15)) show = false;
+                    else if (b === 99 && max < 25) show = false;
+                }
+                card.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+            document.getElementById('no-results').classList.toggle('hidden', visible > 0);
+        }
+
+        // Booking form
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.classList.add('hidden');
+            document.getElementById('booking-success').classList.remove('hidden');
+        });
+
+        // Newsletter
+        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.innerHTML = '<p class="text-green-400 text-sm">Subscribed! ✓</p>';
+        });
+
+        // FAQ
+        document.querySelectorAll('.faq-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('[data-lucide]');
+                content.classList.toggle('open');
+                icon.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : '';
+            });
+        });
+
+        // Testimonial auto-scroll
+        const track = document.getElementById('testimonial-track');
+        let scrollPos = 0;
+        setInterval(() => {
+            scrollPos += 420;
+            if (scrollPos >= track.scrollWidth - track.parentElement.offsetWidth) scrollPos = 0;
+            track.style.transform = `translateX(-${scrollPos}px)`;
+        }, 4000);
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a115a91b705d6068',t:'MTc4MjQwODIxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body></html>
